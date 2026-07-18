@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+<title>Brand Guidelines — Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="White-label brand guidelines template — 6-column grid, monochrome chrome, replaceable assets, editable text." />
+<style>
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  }
+
+  /* ---------- monochrome tokens ---------- */
+  :root {
+    color-scheme: light;
+    --paper: #FFFFFF;
+    --ink: #000000;
+    --t1: rgba(0,0,0,.92);
+    --t2: rgba(0,0,0,.58);
+    --t3: rgba(0,0,0,.36);
+    --line: rgba(0,0,0,.14);
+    --line-soft: rgba(0,0,0,.07);
+    --wash: rgba(0,0,0,.04);
+    --wash-2: rgba(0,0,0,.08);
+    --invert-bg: #000000;
+    --invert-ink: #FFFFFF;
+    --logo-filter: none;
+
+    --brand-primary: #E32636;
+    --brand-secondary: #14383E;
+    --brand-neutral-dark: #111111;
+    --brand-neutral-light: #F4F4F2;
+
+    --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+
+    --sidebar-w: 280px;
+    --sidebar-w-collapsed: 64px;
+    --measure: 44rem;
+    --radius: 12px;
+    --pad-x: 2rem;
+    --pad-sidebar: 1.25rem;
+    --g6-gap: 1.75rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --paper: #0B0B0B; --ink: #FFFFFF;
+      --t1: rgba(255,255,255,.95); --t2: rgba(255,255,255,.60); --t3: rgba(255,255,255,.38);
+      --line: rgba(255,255,255,.17); --line-soft: rgba(255,255,255,.09);
+      --wash: rgba(255,255,255,.06); --wash-2: rgba(255,255,255,.11);
+      --invert-bg: #FFFFFF; --invert-ink: #000000; --logo-filter: invert(1);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0B0B0B; --ink: #FFFFFF;
+    --t1: rgba(255,255,255,.95); --t2: rgba(255,255,255,.60); --t3: rgba(255,255,255,.38);
+    --line: rgba(255,255,255,.17); --line-soft: rgba(255,255,255,.09);
+    --wash: rgba(255,255,255,.06); --wash-2: rgba(255,255,255,.11);
+    --invert-bg: #FFFFFF; --invert-ink: #000000; --logo-filter: invert(1);
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --paper: #FFFFFF; --ink: #000000;
+    --t1: rgba(0,0,0,.92); --t2: rgba(0,0,0,.58); --t3: rgba(0,0,0,.36);
+    --line: rgba(0,0,0,.14); --line-soft: rgba(0,0,0,.07);
+    --wash: rgba(0,0,0,.04); --wash-2: rgba(0,0,0,.08);
+    --invert-bg: #000000; --invert-ink: #FFFFFF; --logo-filter: none;
+  }
+
+  /* ---------- base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--t1);
+    font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: var(--t1); text-underline-offset: 3px; }
+  ::selection { background: var(--invert-bg); color: var(--invert-ink); }
+  ::placeholder { color: var(--t3); }
+
+  h1, h2, h3, h4 { margin: 0; font-weight: 700; color: var(--t1); text-wrap: balance; }
+  p { margin: 0; }
+  ul, ol { margin: 0; padding: 0; list-style: none; }
+  figure { margin: 0; }
+  button { font-family: inherit; }
+  table { border-collapse: collapse; }
+
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 1rem; top: -3rem; z-index: 200;
+    background: var(--invert-bg); color: var(--invert-ink);
+    padding: .6rem 1rem; border-radius: 8px; font-weight: 600; font-size: .8125rem;
+    transition: top .15s ease; text-decoration: none;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+  /* ---------- type tokens ---------- */
+  .fs-eyebrow { font-size: .6875rem; line-height: 1rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); }
+  .fs-h1 { font-size: 2.25rem; line-height: 2.625rem; font-weight: 800; letter-spacing: -.02em; }
+  .fs-h5 { font-size: .9375rem; line-height: 1.375rem; font-weight: 600; letter-spacing: -.005em; }
+  .fs-body1 { font-size: 1.125rem; line-height: 1.75rem; font-weight: 400; }
+  .fs-body2 { font-size: 1rem; line-height: 1.625rem; font-weight: 400; }
+  .fs-body3 { font-size: .875rem; line-height: 1.375rem; font-weight: 400; }
+  .eyebrow { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); }
+
+  /* ---------- shell ---------- */
+  .shell { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: var(--sidebar-w); flex: none;
+    position: fixed; inset: 0 auto 0 0; z-index: 40;
+    display: flex; flex-direction: column;
+    background: var(--paper); border-right: 1px solid var(--line-soft);
+    transition: width .18s ease, transform .22s ease;
+  }
+  .main { margin-left: var(--sidebar-w); min-width: 0; flex: 1; transition: margin-left .18s ease; }
+  .shell.is-collapsed .sidebar { width: var(--sidebar-w-collapsed); }
+  .shell.is-collapsed .main { margin-left: var(--sidebar-w-collapsed); }
+  .shell.is-collapsed .brand-name,
+  .shell.is-collapsed .search,
+  .shell.is-collapsed .nav-chevron,
+  .shell.is-collapsed .nav-label,
+  .shell.is-collapsed .nav-sub,
+  .shell.is-collapsed .sidebar-toolbar .btn,
+  .shell.is-collapsed .sidebar-foot p { display: none; }
+  .shell.is-collapsed .sidebar-toolbar { justify-content: center; }
+  .shell.is-collapsed .nav-link { justify-content: center; }
+  .shell.is-collapsed .nav-num { width: auto; }
+  .shell.is-collapsed .sidebar-head { justify-content: center; padding: 0; }
+  .shell.is-collapsed .brand-mark { display: none; }
+  .shell.is-collapsed .rail-toggle { margin-left: 0; }
+
+  .sidebar-head {
+    display: flex; align-items: center; gap: .625rem;
+    min-height: 58px; padding: 0 var(--pad-sidebar);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .brand-mark { width: 26px; height: 26px; flex: none; }
+  .brand-mark img { width: 100%; height: 100%; filter: var(--logo-filter); }
+  .brand-name { min-width: 0; }
+  .brand-name b { display: block; font-size: .875rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .brand-name span { display: block; font-size: .6563rem; color: var(--t3); }
+  .rail-toggle { margin-left: auto; flex: none; }
+
+  /* ---------- search ---------- */
+  .search { position: relative; margin: .8rem var(--pad-sidebar) .35rem; }
+  .search-ic {
+    position: absolute; left: .6rem; top: 50%; transform: translateY(-50%);
+    width: 13px; height: 13px; color: var(--t3); pointer-events: none;
+  }
+  .search input {
+    width: 100%; padding: .5rem .65rem .5rem 1.9rem;
+    border: 1px solid var(--line); border-radius: 8px;
+    background: transparent; color: var(--t1);
+    font-family: inherit; font-size: .8125rem;
+  }
+  .search input:focus { border-color: var(--ink); outline: none; }
+  .search.is-error { animation: shake .35s ease; }
+  .search.is-error input { border-color: var(--ink); }
+  @keyframes shake {
+    20% { transform: translateX(-3px); } 40% { transform: translateX(3px); }
+    60% { transform: translateX(-2px); } 80% { transform: translateX(2px); }
+  }
+  .sug {
+    position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 60;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden; box-shadow: 0 12px 32px -14px rgba(0,0,0,.35);
+  }
+  .sug-item {
+    display: flex; align-items: baseline; gap: .5rem; width: 100%;
+    padding: .5rem .7rem; border: none; background: none; cursor: pointer;
+    font-size: .8125rem; color: var(--t2); text-align: left; font-family: inherit;
+  }
+  .sug-item .sug-num { font-family: var(--font-mono); font-size: .625rem; color: var(--t3); width: 1.2rem; flex: none; }
+  .sug-item b { color: var(--t1); font-weight: 600; }
+  .sug-item.is-active, .sug-item:hover { background: var(--wash); }
+  .search-msg { font-size: .6875rem; color: var(--t2); padding: .35rem .15rem 0; }
+
+  /* ---------- nav ---------- */
+  .sidebar-scroll { flex: 1; overflow-y: auto; padding: .5rem var(--pad-sidebar) 1rem; }
+  .nav-divider { height: 1px; background: var(--line-soft); margin: .55rem .25rem; }
+  .nav-row { display: flex; align-items: center; }
+  .nav-link {
+    flex: 1; display: flex; align-items: center; gap: .55rem; min-width: 0;
+    padding: .45rem .5rem; border-radius: 7px;
+    color: var(--t2); font-size: .875rem; font-weight: 500; text-decoration: none;
+  }
+  .nav-link:hover { background: var(--wash); color: var(--t1); }
+  .nav-link.is-active { color: var(--t1); font-weight: 700; }
+  .nav-num {
+    font-family: var(--font-mono); font-size: .6875rem; color: var(--t3);
+    width: 1.35rem; flex: none; font-variant-numeric: tabular-nums;
+  }
+  .nav-chevron {
+    flex: none; width: 26px; height: 26px; margin-left: .1rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: none; border: none; border-radius: 6px; color: var(--t3); cursor: pointer;
+  }
+  .nav-chevron:hover { background: var(--wash); color: var(--t1); }
+  .nav-chevron svg { width: 13px; height: 13px; transition: transform .18s ease; }
+  .nav-group.is-open > .nav-row .nav-chevron svg { transform: rotate(90deg); }
+  .nav-sub { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .18s ease; }
+  .nav-group.is-open > .nav-sub { grid-template-rows: 1fr; }
+  .nav-sub > ul { min-height: 0; overflow: hidden; }
+  .nav-sub a {
+    display: block; padding: .34rem .5rem .34rem 2.4rem; border-radius: 6px;
+    font-size: .8125rem; color: var(--t3); text-decoration: none;
+  }
+  .nav-sub a:hover { color: var(--t1); background: var(--wash); }
+  .nav-sub a.is-active { color: var(--t1); font-weight: 600; }
+
+  .sidebar-foot { border-top: 1px solid var(--line-soft); padding: .8rem var(--pad-sidebar); }
+  .sidebar-toolbar { display: flex; gap: .5rem; margin-bottom: .85rem; }
+  .sidebar-toolbar .btn { flex: 1; justify-content: center; }
+  .sidebar-toolbar .icon-btn { flex: none; }
+  .sidebar-foot p { font-size: .7rem; color: var(--t3); line-height: 1.5; }
+  .sidebar-foot p button {
+    background: none; border: none; padding: 0; color: var(--t1);
+    font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+  }
+
+  .mobile-nav-btn { display: none; }
+
+  /* ---------- buttons ---------- */
+  .icon-btn {
+    width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 8px; border: 1px solid var(--line); background: transparent;
+    color: var(--t2); cursor: pointer;
+  }
+  .icon-btn:hover { color: var(--t1); border-color: var(--t3); background: var(--wash); }
+  .icon-btn svg { width: 15px; height: 15px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: .45rem;
+    padding: .5rem .85rem; border-radius: 8px; border: 1px solid var(--line);
+    background: transparent; color: var(--t1); font-size: .8125rem; font-weight: 600;
+    cursor: pointer; text-decoration: none; line-height: 1;
+  }
+  .btn:hover { border-color: var(--t3); background: var(--wash); }
+  .btn svg { width: 14px; height: 14px; flex: none; }
+  .btn-primary { background: var(--invert-bg); border-color: var(--invert-bg); color: var(--invert-ink); }
+  .btn-primary:hover { background: color-mix(in srgb, var(--invert-bg) 80%, var(--paper) 20%); border-color: color-mix(in srgb, var(--invert-bg) 80%, var(--paper) 20%); }
+  .btn-sm { padding: .38rem .6rem; font-size: .75rem; }
+  .btn[aria-disabled="true"] { opacity: .4; pointer-events: none; }
+
+  .copy-btn {
+    display: inline-flex; align-items: center; gap: .35rem;
+    border: 1px solid var(--line); background: transparent; color: var(--t2);
+    border-radius: 6px; padding: .28rem .5rem; font-family: var(--font-mono); font-size: .7188rem;
+    cursor: pointer; flex: none;
+  }
+  .copy-btn:hover { color: var(--t1); border-color: var(--t3); }
+  .copy-btn svg { width: 11px; height: 11px; }
+
+  /* ---------- 6-column grid ---------- */
+  .content { padding: 0 var(--pad-x) 6rem; }
+  .g6 { display: grid; grid-template-columns: repeat(6, 1fr); column-gap: var(--g6-gap); }
+  .gcol-1-3 { grid-column: 1 / 4; }
+  .gcol-4-6 { grid-column: 4 / 7; }
+  .gcol-1-6 { grid-column: 1 / 7; }
+  .gcol-1-2 { grid-column: 1 / 3; }
+  .gcol-3-4 { grid-column: 3 / 5; }
+  .gcol-5-6 { grid-column: 5 / 7; }
+  .gcol-1 { grid-column: 1 / 2; }
+  .gcol-2-4 { grid-column: 2 / 5; }
+  .gcol-4 { grid-column: 4 / 5; }
+  .gcol-5 { grid-column: 5 / 6; }
+  .gcol-6 { grid-column: 6 / 7; }
+
+  .cover { padding: 4.5rem 0 3rem; border-bottom: 1px solid var(--line-soft); row-gap: .9rem; }
+  .cover h1 {
+    font-size: clamp(2.4rem, 1.7rem + 3vw, 4rem);
+    font-weight: 800; letter-spacing: -.035em; line-height: 1.03;
+  }
+  .cover p.lead { color: var(--t2); }
+  .cover-stat { margin-top: 1.1rem; }
+  .cover-stat b { display: block; color: var(--t1); font-size: .8125rem; font-weight: 600; margin-bottom: .15rem; }
+  .cover-stat span { font-size: .75rem; color: var(--t3); }
+
+  section.section { padding: 4rem 0 1.5rem; scroll-margin-top: 1.5rem; }
+  section.section + section.section { border-top: 1px solid var(--line-soft); }
+  .section-head { row-gap: .35rem; margin-bottom: 2.5rem; align-items: start; }
+  .section-index { color: var(--t1); opacity: .18; }
+  .section-sub { color: var(--t3); font-weight: 500; }
+
+  .subsection {
+    display: grid; grid-template-columns: repeat(6, 1fr); column-gap: var(--g6-gap); row-gap: 1.25rem;
+    margin-bottom: 3.5rem; scroll-margin-top: 1.5rem; align-items: start;
+  }
+  .subsection:last-child { margin-bottom: 1rem; }
+  .subsection > .sub-title { grid-column: 1 / 4; margin: 0; color: var(--t1); }
+  .subsection > .subsection-body { grid-column: 4 / 7; display: flex; flex-direction: column; gap: 1.75rem; min-width: 0; }
+  .subsection > .subsection-full { grid-column: 1 / 7; min-width: 0; }
+  h4.block-title { font-size: .875rem; font-weight: 700; margin-bottom: .75rem; }
+
+  .prose { max-width: var(--measure); color: var(--t2); }
+  .prose + .prose { margin-top: .7rem; }
+  .prose b, .prose strong { color: var(--t1); }
+  .note { font-size: .8125rem; color: var(--t3); max-width: var(--measure); }
+  .field-label {
+    font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--t3); margin-bottom: .35rem; display: block;
+  }
+  .placeholder-text { color: var(--t2); font-style: italic; }
+  .stat-pair { display: flex; gap: 1rem; }
+  .stat-pair > div { flex: 1; }
+
+  kbd.path {
+    font-family: var(--font-mono); font-size: .75rem; background: var(--wash-2);
+    padding: .12rem .4rem; border-radius: 5px; color: var(--t1); white-space: nowrap;
+  }
+
+  /* ---------- data tables ---------- */
+  .data-table { width: 100%; font-size: .875rem; }
+  .data-table th {
+    text-align: left; font-size: .6875rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--t3); font-weight: 700; padding: .55rem .6rem; border-bottom: 1px solid var(--line);
+  }
+  .data-table td { padding: .65rem .6rem; border-bottom: 1px solid var(--line-soft); vertical-align: top; color: var(--t2); }
+  .data-table td:first-child { color: var(--t1); font-weight: 600; white-space: nowrap; }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* ---------- media tiles ---------- */
+  .tile { min-width: 0; }
+  .tile img {
+    width: 100%; border-radius: var(--radius); border: 1px solid var(--line-soft);
+    object-fit: fill; background: var(--wash);
+  }
+  .tile.is-hero img { aspect-ratio: 16 / 9; }
+  .tile.is-gallery img { aspect-ratio: 4 / 3; }
+  .tile.is-square img { aspect-ratio: 1 / 1; }
+  .tile.is-wide img { aspect-ratio: 16 / 10; }
+  .tile figcaption { font-size: .75rem; color: var(--t3); margin-top: .5rem; }
+  .tile figcaption b { color: var(--t2); font-weight: 600; }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--g6-gap); }
+  .gallery-grid .tile.is-hero { grid-column: 1 / 7; }
+  .gallery-grid .tile.is-gallery { grid-column: span 2; }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; }
+  .chip {
+    border: 1px solid var(--line); background: transparent; color: var(--t2);
+    border-radius: 999px; padding: .38rem .85rem; font-size: .8125rem; font-weight: 600; cursor: pointer;
+  }
+  .chip:hover { color: var(--t1); border-color: var(--t3); }
+  .chip.is-active { background: var(--invert-bg); border-color: var(--invert-bg); color: var(--invert-ink); }
+  .word-chip {
+    display: inline-block; border-radius: 7px; padding: .32rem .65rem;
+    font-size: .8125rem; font-weight: 600; background: var(--wash); color: var(--t1);
+  }
+  .word-chip.is-avoid { color: var(--t3); text-decoration: line-through; }
+
+  /* ---------- don't cards (misuse, full-bleed 3x2col) ---------- */
+  .dont-grid { display: grid; gap: var(--g6-gap); grid-template-columns: repeat(6, 1fr); }
+  .dont-card { grid-column: span 2; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  @media (max-width: 860px) { .dont-card { grid-column: span 3; } }
+  @media (max-width: 540px) { .dont-card { grid-column: 1 / -1; } }
+  .dont-visual {
+    position: relative; height: 150px; background: var(--wash);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .dont-visual.on-white { background: #FFFFFF; }
+  .dont-visual img { max-height: 100%; }
+  .dont-x {
+    position: absolute; top: .6rem; left: .6rem; z-index: 2;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--invert-bg); color: var(--invert-ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .625rem; font-weight: 700; line-height: 1;
+  }
+  .dont-visual.on-white .dont-x { background: #000; color: #fff; }
+  .dont-card figcaption {
+    padding: .7rem .85rem; font-size: .8125rem; color: var(--t2);
+    border-top: 1px solid var(--line-soft); line-height: 1.45;
+  }
+  .dont-card figcaption b { color: var(--t1); }
+  .misuse-logo { width: 64px; }
+
+  /* ---------- logo section ---------- */
+  .logo-tile {
+    border: 1px solid var(--line); border-radius: var(--radius);
+    height: 150px; display: flex; align-items: center; justify-content: center; padding: 1.25rem;
+  }
+  .logo-tile.on-white { background: #FFFFFF; border-color: rgba(0,0,0,.12); }
+  .logo-tile.on-black { background: #0A0A0A; border-color: rgba(255,255,255,.14); }
+  .logo-tile img { max-height: 56px; }
+  .logo-caption { font-size: .75rem; color: var(--t3); margin-top: .5rem; font-weight: 600; }
+  .logo-item + .logo-item { margin-top: 0; }
+
+  .clearspace-demo {
+    background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center; padding: 2.4rem;
+  }
+  .clearspace-box { position: relative; padding: 1.7rem; border: 1px dashed rgba(0,0,0,.35); }
+  .clearspace-box img { width: 44px; }
+  .clearspace-box .x-label {
+    position: absolute; top: -1.3rem; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-mono); font-size: .625rem; color: rgba(0,0,0,.45);
+  }
+  .grid-demo {
+    background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center; padding: 2.5rem;
+  }
+  .grid-demo svg { width: 200px; height: 200px; }
+
+  /* ---------- card (still used: logo minimum, functional-elements demo chrome) ---------- */
+  .card { background: transparent; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem; }
+  .card h4 { font-size: .9063rem; margin-bottom: .35rem; }
+  .card p { font-size: .875rem; }
+
+  /* ---------- typography ---------- */
+  .specimen-glyphs { font-size: clamp(1.8rem, 1.3rem + 2vw, 2.75rem); font-weight: 700; letter-spacing: -.02em; }
+  .specimen-alpha { margin-top: .9rem; font-size: .9375rem; color: var(--t2); line-height: 1.8; }
+  .weight-row { display: flex; align-items: baseline; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--line-soft); }
+  .weight-row:last-child { border-bottom: none; }
+  .weight-num { font-family: var(--font-mono); font-size: .7188rem; color: var(--t3); width: 3rem; flex: none; }
+  .weight-sample { font-size: 1rem; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .weight-name { font-size: .75rem; color: var(--t3); width: 7rem; text-align: right; flex: none; }
+
+  .scale-grid { display: grid; grid-template-columns: repeat(6, 1fr); column-gap: var(--g6-gap); row-gap: 0; }
+  .scale-cell { padding: .95rem 0; border-bottom: 1px solid var(--line-soft); min-width: 0; }
+  .scale-head-cell { padding: 0 0 .55rem; border-bottom: 1px solid var(--line); }
+  .scale-code { font-family: var(--font-mono); font-size: .8125rem; font-weight: 700; color: var(--t1); }
+  .scale-meta { font-family: var(--font-mono); font-size: .7188rem; color: var(--t3); }
+  .scale-btn-cell { display: flex; align-items: center; justify-content: flex-end; }
+
+  .unit-toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; gap: 2px; flex: none; }
+  .unit-toggle button {
+    border: none; background: none; padding: .3rem .7rem; border-radius: 999px;
+    font-size: .6875rem; font-weight: 700; font-family: var(--font-mono); color: var(--t3); cursor: pointer;
+  }
+  .unit-toggle button.is-active { background: var(--invert-bg); color: var(--invert-ink); }
+
+  .usage-sample .anno {
+    display: block; font-family: var(--font-mono); font-size: .5938rem; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--t3); margin: 1.1rem 0 .25rem;
+  }
+  .usage-sample .anno:first-child { margin-top: 0; }
+  .usage-h1 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  .usage-h3 { font-size: 1.1875rem; font-weight: 700; }
+  .usage-body { font-size: .9375rem; color: var(--t2); }
+  .usage-caption { font-size: .8125rem; color: var(--t3); }
+  .usage-sample + .usage-sample { padding-top: 1.5rem; border-top: 1px solid var(--line-soft); }
+
+  .func-item { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--line-soft); }
+  .func-item:last-child { border-bottom: none; }
+  .func-item .demo { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; min-width: 0; }
+  .func-block + .func-block { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .func-block h4 { font-size: .875rem; margin-bottom: .5rem; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: .3rem;
+    border-radius: 999px; padding: .3rem .75rem; font-size: .75rem; font-weight: 600; line-height: 1;
+  }
+  .pill-outline { border: 1px solid var(--line); color: var(--t2); }
+  .pill-soft { background: var(--wash-2); color: var(--t1); }
+  .pill-filled { background: var(--invert-bg); color: var(--invert-ink); }
+  .pill-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  .field { display: flex; flex-direction: column; gap: .35rem; min-width: 0; flex: 1; }
+  .field label { font-size: .75rem; font-weight: 600; color: var(--t1); }
+  .field input[type="text"], .field input[type="email"], .field select {
+    width: 100%; padding: .55rem .7rem; border-radius: 8px;
+    border: 1px solid var(--line); background: transparent; color: var(--t1);
+    font-family: inherit; font-size: .875rem;
+  }
+  .field input:focus, .field select:focus { border-color: var(--ink); outline: none; }
+  .field .hint { font-size: .6875rem; color: var(--t3); }
+  .check-row { display: flex; align-items: center; gap: .5rem; font-size: .8438rem; color: var(--t1); }
+  .check-row input { accent-color: var(--invert-bg); width: 15px; height: 15px; }
+  input.switch {
+    appearance: none; -webkit-appearance: none; width: 42px; height: 24px; border-radius: 999px;
+    background: var(--wash-2); border: 1px solid var(--line); position: relative; cursor: pointer;
+    transition: background .15s ease; margin: 0; flex: none;
+  }
+  input.switch::after {
+    content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--paper); border: 1px solid var(--line); transition: left .15s ease;
+  }
+  input.switch:checked { background: var(--invert-bg); border-color: var(--invert-bg); }
+  input.switch:checked::after { left: 20px; border-color: transparent; }
+
+  /* ---------- colour ---------- */
+  .swatch { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line-soft); display: flex; flex-direction: column; }
+  .swatch-face { min-height: 200px; padding: 1.15rem 1.2rem; display: flex; flex-direction: column; justify-content: space-between; }
+  .swatch-face h4 { font-size: 1.0625rem; font-weight: 700; color: inherit; }
+  .swatch-role { font-size: .75rem; opacity: .78; margin-top: .2rem; }
+  .swatch-values { display: flex; flex-direction: column; gap: .1rem; }
+  .value-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: none; border: none; color: inherit; cursor: pointer;
+    padding: .22rem 0; font-family: inherit; width: 100%; border-radius: 4px;
+  }
+  .value-row:hover { opacity: .75; }
+  .value-row .vl { font-size: .5938rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
+  .value-row .vv { font-family: var(--font-mono); font-size: .75rem; font-variant-numeric: tabular-nums; }
+  .tint-strip { display: flex; height: 26px; }
+  .tint-swatch { flex: 1; border: none; cursor: pointer; padding: 0; }
+  .tint-swatch:hover { outline: 1px solid var(--ink); outline-offset: -2px; }
+  .swatch + .swatch { margin-top: 0; }
+
+  .ratio-bar { display: flex; height: 36px; border-radius: 9px; overflow: hidden; border: 1px solid var(--line-soft); }
+  .ratio-seg { display: flex; align-items: center; justify-content: center; font-size: .6875rem; font-weight: 700; }
+
+  .badge { display: inline-flex; align-items: center; padding: .18rem .5rem; border-radius: 999px; font-size: .6563rem; font-weight: 700; font-family: var(--font-mono); }
+  .badge.pass { background: var(--invert-bg); color: var(--invert-ink); }
+  .badge.fail { border: 1px solid var(--line); color: var(--t3); }
+  .contrast-pair { display: inline-flex; border-radius: 6px; overflow: hidden; border: 1px solid var(--line-soft); }
+  .contrast-pair span { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 26px; font-size: .7rem; font-weight: 700; }
+
+  /* ---------- motion ---------- */
+  .token-row { display: grid; grid-template-columns: 5.5rem 1fr auto auto; gap: .75rem; align-items: center; padding: .65rem 0; border-bottom: 1px solid var(--line-soft); }
+  .token-row:last-child { border-bottom: none; }
+  .token-row .motion-name { font-size: .8125rem; font-weight: 700; }
+  .token-row .motion-val { font-family: var(--font-mono); font-size: .7188rem; color: var(--t3); text-align: right; white-space: nowrap; }
+  .duration-bar-track { background: var(--wash-2); border-radius: 999px; height: 8px; position: relative; overflow: hidden; }
+  .duration-bar-fill { position: absolute; inset: 0 auto 0 0; background: var(--invert-bg); border-radius: 999px; }
+  .ease-graph { background: var(--wash); border-radius: 8px; padding: .5rem .6rem .2rem; color: var(--t1); line-height: 0; }
+  .motion-row { display: grid; grid-template-columns: 6.5rem 1fr 7.5rem; gap: 1rem; align-items: center; padding: .75rem 0; border-bottom: 1px solid var(--line-soft); }
+  .motion-row:last-child { border-bottom: none; }
+  .motion-track { position: relative; height: 32px; background: var(--wash); border-radius: 8px; overflow: hidden; cursor: pointer; }
+  .motion-dot { position: absolute; top: 4px; left: 4px; width: 24px; height: 24px; border-radius: 50%; background: var(--invert-bg); }
+  .motion-name { font-size: .8125rem; font-weight: 700; }
+  .motion-val { font-family: var(--font-mono); font-size: .7188rem; color: var(--t3); text-align: right; }
+  .pulse-group { display: flex; gap: .6rem; }
+  .pulse-group span { width: 18px; height: 18px; border-radius: 50%; background: var(--invert-bg); animation: pulse 1s ease-in-out infinite alternate; }
+  .pulse-group span:nth-child(2) { animation-delay: .2s; }
+  .pulse-group span:nth-child(3) { animation-delay: .4s; }
+  @keyframes pulse { from { transform: scale(.6); opacity: .4; } to { transform: scale(1.15); opacity: 1; } }
+
+  /* ---------- voice ---------- */
+  .slider-row { margin-bottom: 1.35rem; }
+  .slider-row:last-child { margin-bottom: 0; }
+  .slider-labels { display: flex; justify-content: space-between; font-size: .8125rem; font-weight: 600; margin-bottom: .5rem; }
+  .slider-labels span:last-child { color: var(--t3); }
+  .slider-track { position: relative; height: 5px; background: var(--wash-2); border-radius: 4px; }
+  .slider-marker {
+    position: absolute; top: 50%; width: 15px; height: 15px; border-radius: 50%;
+    background: var(--paper); border: 3.5px solid var(--ink); transform: translate(-50%,-50%);
+  }
+  .quote-card { font-size: .9063rem; color: var(--t1); line-height: 1.5; padding: 0; }
+  .quote-card::before { content: '“'; } .quote-card::after { content: '”'; }
+  .word-cols .word-col + .word-col { margin-top: 1.5rem; }
+  .word-col h4 { font-size: .6875rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .7rem; color: var(--t3); }
+  .word-col ul { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+  /* ---------- resources ---------- */
+  .res-table { width: 100%; }
+  .res-table td { padding: .95rem .5rem; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+  .res-table tr:last-child td { border-bottom: none; }
+  .res-name { font-weight: 600; font-size: .9063rem; }
+  .res-meta { font-size: .75rem; color: var(--t3); margin-top: .15rem; }
+  .res-format { font-family: var(--font-mono); font-size: .7188rem; color: var(--t3); white-space: nowrap; }
+  .res-actions { display: flex; gap: .5rem; justify-content: flex-end; white-space: nowrap; }
+
+  footer.doc-footer {
+    border-top: 1px solid var(--line-soft); padding: 2rem 0 1rem; margin-top: 3rem;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  footer.doc-footer p { font-size: .75rem; color: var(--t3); }
+
+  /* ---------- drawer ---------- */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 60;
+    opacity: 0; pointer-events: none; transition: opacity .2s ease;
+  }
+  .overlay.is-open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: 340px; max-width: 90vw; z-index: 70;
+    background: var(--paper); border-left: 1px solid var(--line);
+    transform: translateX(100%); transition: transform .22s ease;
+    display: flex; flex-direction: column; box-shadow: -20px 0 48px -30px rgba(0,0,0,.5);
+  }
+  .drawer.is-open { transform: translateX(0); }
+  .drawer-head { display: flex; align-items: flex-start; gap: .6rem; padding: 1.1rem 1.2rem; border-bottom: 1px solid var(--line-soft); }
+  .drawer-head h3 { font-size: 1rem; }
+  .drawer-head p { font-size: .7188rem; color: var(--t3); margin-top: .2rem; }
+  .drawer-body { padding: 1.2rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
+  .drawer-field label { display: block; font-size: .75rem; font-weight: 700; margin-bottom: .4rem; }
+  .drawer-field input[type="text"] {
+    width: 100%; padding: .55rem .65rem; border-radius: 8px; border: 1px solid var(--line);
+    background: transparent; color: var(--t1); font-family: inherit; font-size: .875rem;
+  }
+  .drawer-field input[type="text"]:focus { border-color: var(--ink); outline: none; }
+  .color-field { display: flex; align-items: center; gap: .6rem; }
+  .color-field input[type="color"] {
+    width: 38px; height: 38px; border-radius: 9px; border: 1px solid var(--line);
+    padding: 2px; background: transparent; cursor: pointer; flex: none;
+  }
+  .color-field input[type="text"] { flex: 1; font-family: var(--font-mono); }
+  .drawer-divider { height: 1px; background: var(--line-soft); }
+  .drawer-hint { font-size: .7188rem; color: var(--t3); line-height: 1.5; margin-top: .45rem; }
+  .drawer-foot { padding: 1rem 1.2rem; border-top: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: .5rem; }
+
+  /* ---------- edit mode ---------- */
+  body.is-editing [data-ek] { outline: 1px dashed var(--line); outline-offset: 3px; border-radius: 2px; cursor: text; }
+  body.is-editing [data-ek]:hover { outline-color: var(--t3); }
+  body.is-editing [data-ek]:focus { outline: 2px solid var(--ink); }
+  .edit-hint {
+    position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%); z-index: 80;
+    display: flex; align-items: center; gap: .8rem;
+    background: var(--invert-bg); color: var(--invert-ink);
+    padding: .55rem .6rem .55rem 1rem; border-radius: 999px;
+    font-size: .8125rem; font-weight: 600; box-shadow: 0 12px 32px -12px rgba(0,0,0,.5);
+  }
+  .edit-hint[hidden] { display: none; }
+  .edit-hint button {
+    background: var(--invert-ink); color: var(--invert-bg); border: none; border-radius: 999px;
+    padding: .32rem .8rem; font-size: .75rem; font-weight: 700; cursor: pointer; font-family: inherit;
+  }
+
+  /* ---------- toast ---------- */
+  .toast-wrap { position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%); z-index: 90; display: flex; flex-direction: column; gap: .5rem; align-items: center; }
+  body.is-editing .toast-wrap { bottom: 4.25rem; }
+  .toast {
+    background: var(--invert-bg); color: var(--invert-ink); font-size: .8125rem; font-weight: 600;
+    padding: .55rem 1rem; border-radius: 999px; box-shadow: 0 12px 32px -12px rgba(0,0,0,.5);
+    opacity: 0; transform: translateY(6px); transition: opacity .18s ease, transform .18s ease;
+  }
+  .toast.is-visible { opacity: 1; transform: translateY(0); }
+
+  .flash { animation: flashbg 1.4s ease-out 1; }
+  @keyframes flashbg { 0% { background: var(--wash-2); } 100% { background: transparent; } }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); width: 280px !important; }
+    .shell.is-nav-open .sidebar { transform: translateX(0); }
+    .shell.is-collapsed .brand-name, .shell.is-collapsed .search, .shell.is-collapsed .nav-label,
+    .shell.is-collapsed .nav-chevron, .shell.is-collapsed .nav-sub,
+    .shell.is-collapsed .sidebar-toolbar .btn { display: initial; }
+    .shell.is-collapsed .nav-sub { display: grid; }
+    .shell.is-collapsed .sidebar-toolbar { justify-content: flex-start; }
+    .shell.is-collapsed .nav-link { justify-content: flex-start; }
+    .main, .shell.is-collapsed .main { margin-left: 0; }
+    .rail-toggle { display: none; }
+    .mobile-nav-btn {
+      display: inline-flex; position: fixed; top: 1rem; left: 1rem; z-index: 45;
+      background: var(--paper); box-shadow: 0 8px 24px -12px rgba(0,0,0,.3);
+    }
+    .content { padding: 4.5rem 1.25rem 5rem; }
+    .nav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 39; opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+    .shell.is-nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
+  }
+  @media (min-width: 901px) { .nav-overlay { display: none; } }
+
+  @media (max-width: 780px) {
+    .g6, .cover, .section-head, .subsection, .gallery-grid, .scale-grid, .dont-grid { grid-template-columns: 1fr !important; row-gap: 1rem; }
+    [class*="gcol-"], .subsection > .sub-title, .subsection > .subsection-body, .subsection > .subsection-full,
+    .gallery-grid .tile, .dont-card { grid-column: 1 / -1 !important; }
+    .scale-head-cell.scale-btn-cell, .scale-btn-cell { justify-content: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    .pulse-group span { animation: none; }
+  }
+
+  @media print {
+    .sidebar, .drawer, .overlay, .toast-wrap, .nav-overlay, .edit-hint, .mobile-nav-btn { display: none !important; }
+    .main { margin-left: 0 !important; }
+    section.section { break-inside: avoid-page; }
+  }
+</style>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="shell" id="shell">
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <aside class="sidebar" id="sidebar" aria-label="Section navigation">
+    <div class="sidebar-head">
+      <div class="brand-mark" aria-hidden="true"><img src="assets/logo/logo-icon.svg" alt="" /></div>
+      <div class="brand-name">
+        <b id="brandNameDisplay">Brand Name</b>
+        <span>Guidelines · v0.1</span>
+      </div>
+      <button class="icon-btn rail-toggle" id="railToggle" aria-label="Collapse sidebar" aria-pressed="false" title="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9.5 4v16"/></svg>
+      </button>
+    </div>
+
+    <div class="search" id="searchWrap">
+      <svg class="search-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="searchInput" type="text" placeholder="Search sections" autocomplete="off" spellcheck="false"
+             role="combobox" aria-expanded="false" aria-controls="searchSug" aria-label="Search sections" />
+      <div class="sug" id="searchSug" role="listbox" hidden></div>
+      <p class="search-msg" id="searchMsg" hidden></p>
+    </div>
+
+    <nav class="sidebar-scroll"><ul id="navList"></ul></nav>
+
+    <div class="sidebar-foot">
+      <div class="sidebar-toolbar">
+        <button class="btn btn-sm" id="printBtn" title="Print or save as PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+          Print
+        </button>
+        <button class="btn btn-sm" id="customizeToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          Customize
+        </button>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+      </div>
+      <p>Every asset is a placeholder. Swap files in <span class="mono">assets/</span>, set tokens in <button id="openCustomizeInline" type="button">Customize</button>, or turn on text editing.</p>
+    </div>
+  </aside>
+
+  <div class="main">
+    <button class="icon-btn mobile-nav-btn" id="navToggle" aria-label="Open navigation" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <main id="main-content" class="content">
+
+      <div class="cover g6">
+        <span class="eyebrow gcol-4-6">Brand Guidelines · White-label template</span>
+        <h1 id="coverTitle" class="gcol-4-6">Brand Name</h1>
+        <p class="lead fs-body1 gcol-4-6">This document is a structural template, not a finished identity. Every asset — logo, palette, typeface, imagery, motion — is a stand-in. Replace the files in <span class="mono">assets/</span>, set the brand tokens in Customize, and edit any text directly on the page.</p>
+        <div class="cover-stat gcol-4"><b>Version</b><span>0.1 — Scaffold</span></div>
+        <div class="cover-stat gcol-5"><b>Last updated</b><span>18 Jul 2026</span></div>
+        <div class="cover-stat gcol-6"><b>Status</b><span>Template · not brand-specific</span></div>
+      </div>
+
+      <!-- ============ 01 OVERVIEW ============ -->
+      <section class="section" id="overview" aria-labelledby="overview-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">01</span>
+          <h2 id="overview-h" class="fs-h1 gcol-4-6">Overview</h2>
+          <p class="section-sub fs-body3 gcol-4-6">What the brand stands for, and how to read the rest of this document.</p>
+        </div>
+
+        <div class="subsection" id="introduction">
+          <h3 class="sub-title fs-h5">Introduction</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body1">[Brand Name] is [a one-line description of what the brand is and who it serves]. It exists because [the gap, tension, or belief that brought the brand to life]. Everything in this document — the mark, the palette, the voice — is in service of that idea.</p>
+            <p class="prose fs-body1">[Second paragraph: where the brand operates, what it offers, and the feeling it should leave people with. Keep it short enough to read aloud in thirty seconds.]</p>
+          </div>
+        </div>
+
+        <div class="subsection" id="strategy">
+          <h3 class="sub-title fs-h5">Strategy</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Mission, positioning, and the pillars they rest on.</p>
+            <div>
+              <span class="field-label">Mission</span>
+              <p class="placeholder-text fs-body2">[One sentence on why the brand exists, beyond making money.]</p>
+            </div>
+            <div>
+              <span class="field-label">Positioning</span>
+              <p class="placeholder-text fs-body2">[Who we serve, what we offer, and why we're different — one paragraph.]</p>
+            </div>
+            <div>
+              <h4 class="block-title">Pillars</h4>
+              <div style="display:flex; flex-direction:column; gap:1.25rem;">
+                <div><h4 class="fs-h5">[Pillar One]</h4><p class="placeholder-text fs-body2">[What this pillar means, and how it shows up in the work.]</p></div>
+                <div><h4 class="fs-h5">[Pillar Two]</h4><p class="placeholder-text fs-body2">[What this pillar means, and how it shows up in the work.]</p></div>
+                <div><h4 class="fs-h5">[Pillar Three]</h4><p class="placeholder-text fs-body2">[What this pillar means, and how it shows up in the work.]</p></div>
+              </div>
+            </div>
+            <div id="design-approach">
+              <h4 class="block-title">Design approach</h4>
+              <p class="prose fs-body2">[How the brand approaches design as a discipline: the balance between consistency and expression, what gets prioritised when principles conflict, and the overall temperature of the visual work — restrained, loud, warm, technical.]</p>
+              <ul class="prose fs-body2" style="margin-top:.7rem; display:flex; flex-direction:column; gap:.4rem;">
+                <li>— [Principle one, e.g. clarity beats cleverness]</li>
+                <li>— [Principle two, e.g. one bold move per layout]</li>
+                <li>— [Principle three, e.g. photography leads, graphics support]</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="basics">
+          <h3 class="sub-title fs-h5">The Basics</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">How this document works, and the vocabulary it uses. Read this before applying anything from the later sections.</p>
+            <div>
+              <span class="field-label">Replace assets</span>
+              <p class="fs-body2">Imagery and logos load from the local <span class="mono">assets/</span> folders. Replace any file — keeping the same filename — and this page updates automatically. Logos must stay <b>SVG</b>; images are <b>PNG</b>.</p>
+            </div>
+            <div>
+              <span class="field-label">Set the tokens</span>
+              <p class="fs-body2">Brand name and the four palette colours live in the <b>Customize</b> panel (sidebar, bottom). Changes preview live and are remembered by this browser.</p>
+            </div>
+            <div>
+              <span class="field-label">Edit the text</span>
+              <p class="fs-body2">Turn on <b>text editing</b> in Customize, then click any paragraph or heading and type. Anything wrapped in [brackets] is placeholder copy waiting for a real brand.</p>
+            </div>
+            <div>
+              <h4 class="block-title">Terminology</h4>
+              <div style="overflow-x:auto;">
+                <table class="data-table">
+                  <thead><tr><th>Term</th><th>What it is</th><th>Use it for</th></tr></thead>
+                  <tbody>
+                    <tr><td>HEX</td><td>Six-digit colour code, e.g. <span class="mono">#111111</span></td><td>Web, apps, and anything on a screen</td></tr>
+                    <tr><td>RGB</td><td>Red / green / blue values, additive light colour</td><td>Screens, video, digital design tools</td></tr>
+                    <tr><td>CMYK</td><td>Cyan / magenta / yellow / black ink percentages</td><td>Print production — brochures, packaging, posters</td></tr>
+                    <tr><td>Pantone (PMS)</td><td>Standardised spot-ink colours matched by code</td><td>Brand-critical print and merchandise where exact colour matters</td></tr>
+                    <tr><td>Lockup</td><td>A fixed, approved arrangement of logo elements</td><td>Any time the logo appears — never rebuild it manually</td></tr>
+                    <tr><td>Wordmark</td><td>The brand name set in its logo form</td><td>Wide formats where the full name should read</td></tr>
+                    <tr><td>Icon mark</td><td>The symbol without the name</td><td>Avatars, favicons, and very small sizes</td></tr>
+                    <tr><td>Clear space</td><td>Protected empty area around the logo, measured in <span class="mono">x</span></td><td>Keeping the mark legible next to other elements</td></tr>
+                    <tr><td>Weight</td><td>The thickness of a typeface style (400, 700…)</td><td>Building hierarchy without changing typefaces</td></tr>
+                    <tr><td>Tracking / leading</td><td>Letter-spacing / line-height of set type</td><td>Fine-tuning headlines and body text</td></tr>
+                    <tr><td>WCAG AA</td><td>Accessibility contrast standard (4.5:1 for body text)</td><td>Checking any text-on-colour combination</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+              <h4 class="block-title">File formats</h4>
+              <div style="overflow-x:auto;">
+                <table class="data-table">
+                  <thead><tr><th>Format</th><th>What it is</th><th>Use it for</th></tr></thead>
+                  <tbody>
+                    <tr><td>SVG</td><td>Vector — scales to any size without quality loss</td><td>Logos and icons everywhere digital</td></tr>
+                    <tr><td>PNG</td><td>Raster with transparency</td><td>Screenshots, imagery, quick placements on screen</td></tr>
+                    <tr><td>EPS / PDF</td><td>Vector formats print vendors expect</td><td>Sending the logo to printers and manufacturers</td></tr>
+                    <tr><td>WOFF2</td><td>Compressed web font file</td><td>Loading the brand typeface on websites</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 02 MOODBOARD ============ -->
+      <section class="section" id="moodboard" aria-labelledby="moodboard-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">02</span>
+          <h2 id="moodboard-h" class="fs-h1 gcol-4-6">Moodboard</h2>
+          <p class="section-sub fs-body3 gcol-4-6">Reference imagery that sets the temperature before any asset exists. Replace the files in <span class="mono">assets/moodboard/</span>.</p>
+        </div>
+
+        <div class="subsection" id="moodboard-gallery">
+          <h3 class="sub-title fs-h5">Gallery</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Replace the eight files below — tag each with what it's referencing. First tile is the hero (16:9); the rest run three-per-row (4:3).</p>
+          </div>
+          <div class="subsection-full">
+            <div class="chip-row" id="moodChips" data-nonedit>
+              <button class="chip is-active" data-tag="all">All</button>
+              <button class="chip" data-tag="texture">Texture</button>
+              <button class="chip" data-tag="light">Light</button>
+              <button class="chip" data-tag="colour">Colour</button>
+              <button class="chip" data-tag="composition">Composition</button>
+            </div>
+            <div class="gallery-grid" id="moodGrid">
+              <figure class="tile is-hero" data-tag="texture"><img src="assets/moodboard/reference-01.png" alt="Moodboard reference 1" loading="lazy" /><figcaption><b>Reference 01</b> · [Texture]</figcaption></figure>
+              <figure class="tile is-gallery" data-tag="light"><img src="assets/moodboard/reference-02.png" alt="Moodboard reference 2" loading="lazy" /><figcaption><b>Reference 02</b> · [Light]</figcaption></figure>
+              <figure class="tile is-gallery" data-tag="colour"><img src="assets/moodboard/reference-03.png" alt="Moodboard reference 3" loading="lazy" /><figcaption><b>Reference 03</b> · [Colour]</figcaption></figure>
+              <figure class="tile is-gallery" data-tag="composition"><img src="assets/moodboard/reference-04.png" alt="Moodboard reference 4" loading="lazy" /><figcaption><b>Reference 04</b> · [Composition]</figcaption></figure>
+              <figure class="tile is-gallery" data-tag="texture"><img src="assets/moodboard/reference-05.png" alt="Moodboard reference 5" loading="lazy" /><figcaption><b>Reference 05</b> · [Texture]</figcaption></figure>
+              <figure class="tile is-gallery" data-tag="composition"><img src="assets/moodboard/reference-06.png" alt="Moodboard reference 6" loading="lazy" /><figcaption><b>Reference 06</b> · [Composition]</figcaption></figure>
+              <figure class="tile is-gallery" data-tag="colour"><img src="assets/moodboard/reference-07.png" alt="Moodboard reference 7" loading="lazy" /><figcaption><b>Reference 07</b> · [Colour]</figcaption></figure>
+              <figure class="tile is-gallery" data-tag="light"><img src="assets/moodboard/reference-08.png" alt="Moodboard reference 8" loading="lazy" /><figcaption><b>Reference 08</b> · [Light]</figcaption></figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="moodboard-keywords">
+          <h3 class="sub-title fs-h5">Keywords</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Adjectives the visual work should evoke. Use them to brief photographers, illustrators, and designers.</p>
+            <div class="chip-row" style="margin-bottom:0;">
+              <span class="word-chip">[Confident]</span>
+              <span class="word-chip">[Warm]</span>
+              <span class="word-chip">[Direct]</span>
+              <span class="word-chip">[Crafted]</span>
+              <span class="word-chip">[Unhurried]</span>
+              <span class="word-chip">[Optimistic]</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 03 LOGO ============ -->
+      <section class="section" id="logo" aria-labelledby="logo-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">03</span>
+          <h2 id="logo-h" class="fs-h1 gcol-4-6">Logo</h2>
+          <p class="section-sub fs-body3 gcol-4-6">Lockups, spacing, sizing, and what never to do. The mark shown is a placeholder — replace the SVGs in <span class="mono">assets/logo/</span>.</p>
+        </div>
+
+        <div class="subsection" id="logo-variations">
+          <h3 class="sub-title fs-h5">Variations</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Four lockups for four contexts — pick the one built for where it's going.</p>
+            <div class="logo-item">
+              <div class="logo-tile on-white"><img src="assets/logo/logo-primary.svg" alt="Primary logo lockup" /></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-top:.5rem;">
+                <p class="logo-caption" style="margin:0;">Primary lockup</p>
+                <button class="icon-btn" data-copy-svg="assets/logo/logo-primary.svg" title="Copy SVG source" aria-label="Copy SVG source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+            <div class="logo-item">
+              <div class="logo-tile on-black"><img src="assets/logo/logo-reversed.svg" alt="Reversed logo lockup" /></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-top:.5rem;">
+                <p class="logo-caption" style="margin:0;">Reversed — dark backgrounds</p>
+                <button class="icon-btn" data-copy-svg="assets/logo/logo-reversed.svg" title="Copy SVG source" aria-label="Copy SVG source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+            <div class="logo-item">
+              <div class="logo-tile on-white"><img src="assets/logo/logo-icon.svg" alt="Icon mark" style="max-height:48px;" /></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-top:.5rem;">
+                <p class="logo-caption" style="margin:0;">Icon mark — small sizes</p>
+                <button class="icon-btn" data-copy-svg="assets/logo/logo-icon.svg" title="Copy SVG source" aria-label="Copy SVG source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+            <div class="logo-item">
+              <div class="logo-tile on-white"><img src="assets/logo/logo-wordmark.svg" alt="Wordmark" /></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-top:.5rem;">
+                <p class="logo-caption" style="margin:0;">Wordmark — wide formats</p>
+                <button class="icon-btn" data-copy-svg="assets/logo/logo-wordmark.svg" title="Copy SVG source" aria-label="Copy SVG source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="logo-grid">
+          <h3 class="sub-title fs-h5">Grid</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">The proportions the mark is built on. Keep these relationships if you resize or redraw it.</p>
+            <div class="grid-demo">
+              <svg viewBox="0 0 200 200">
+                <rect x="10" y="10" width="180" height="180" fill="none" stroke="#000" stroke-opacity=".15" stroke-dasharray="4 4"/>
+                <line x1="70" y1="10" x2="70" y2="190" stroke="#000" stroke-opacity=".15" stroke-dasharray="4 4"/>
+                <line x1="130" y1="10" x2="130" y2="190" stroke="#000" stroke-opacity=".15" stroke-dasharray="4 4"/>
+                <line x1="10" y1="70" x2="190" y2="70" stroke="#000" stroke-opacity=".15" stroke-dasharray="4 4"/>
+                <line x1="10" y1="130" x2="190" y2="130" stroke="#000" stroke-opacity=".15" stroke-dasharray="4 4"/>
+                <line x1="10" y1="10" x2="190" y2="190" stroke="#000" stroke-opacity=".1"/>
+                <line x1="190" y1="10" x2="10" y2="190" stroke="#000" stroke-opacity=".1"/>
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#000" stroke-opacity=".12"/>
+                <g transform="translate(28,28) scale(1.5)">
+                  <rect x="10" y="10" width="76" height="76" rx="20" fill="none" stroke="#000" stroke-width="3"/>
+                  <circle cx="48" cy="48" r="15" fill="#000"/>
+                </g>
+              </svg>
+            </div>
+            <p class="note">The mark sits inside a square module; its corner radius and inner circle are sized from that same base unit.</p>
+          </div>
+        </div>
+
+        <div class="subsection" id="logo-clearspace">
+          <h3 class="sub-title fs-h5">Clear space &amp; minimum size</h3>
+          <div class="subsection-body">
+            <div class="clearspace-demo">
+              <div class="clearspace-box">
+                <span class="x-label">x</span>
+                <img src="assets/logo/logo-icon.svg" alt="Logo with clear space guide" />
+              </div>
+            </div>
+            <p class="note">Clear space equals <b style="color:var(--t1);">x</b> — the height of the icon mark — on all sides. Nothing enters that zone: no text, no edges, no other logos.</p>
+            <div class="stat-pair">
+              <div class="card"><span class="field-label">Digital minimum</span><p>24px height</p></div>
+              <div class="card"><span class="field-label">Print minimum</span><p>15mm height</p></div>
+            </div>
+            <p class="note">Below minimum size, switch to the icon mark rather than shrinking the full lockup.</p>
+          </div>
+        </div>
+
+        <div class="subsection" id="logo-files">
+          <h3 class="sub-title fs-h5">Files</h3>
+          <div class="subsection-body" data-nonedit>
+            <div class="logo-item" style="display:flex; align-items:center; justify-content:space-between; gap:.75rem;">
+              <a class="btn" href="assets/logo/logo-primary.svg" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Primary · SVG
+              </a>
+              <button class="btn btn-sm" data-copy-svg="assets/logo/logo-primary.svg">Copy SVG</button>
+            </div>
+            <div class="logo-item" style="display:flex; align-items:center; justify-content:space-between; gap:.75rem;">
+              <a class="btn" href="assets/logo/logo-reversed.svg" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Reversed · SVG
+              </a>
+              <button class="btn btn-sm" data-copy-svg="assets/logo/logo-reversed.svg">Copy SVG</button>
+            </div>
+            <div class="logo-item" style="display:flex; align-items:center; justify-content:space-between; gap:.75rem;">
+              <a class="btn" href="assets/logo/logo-icon.svg" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Icon · SVG
+              </a>
+              <button class="btn btn-sm" data-copy-svg="assets/logo/logo-icon.svg">Copy SVG</button>
+            </div>
+            <div class="logo-item" style="display:flex; align-items:center; justify-content:space-between; gap:.75rem;">
+              <a class="btn" href="assets/logo/logo-wordmark.svg" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Wordmark · SVG
+              </a>
+              <button class="btn btn-sm" data-copy-svg="assets/logo/logo-wordmark.svg">Copy SVG</button>
+            </div>
+          </div>
+          <div class="subsection-body">
+            <p class="note">All logo files live in <kbd class="path">assets/logo/</kbd>. Replace them with the real brand's SVGs — same filenames — and every logo on this page updates, including the sidebar.</p>
+          </div>
+        </div>
+
+        <div class="subsection" id="logo-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual on-white"><span class="dont-x">✕</span><img class="misuse-logo" src="assets/logo/logo-icon.svg" alt="" style="transform:scaleX(1.6);" /></div>
+              <figcaption><b>Don't</b> stretch, condense, or skew the mark.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual on-white"><span class="dont-x">✕</span><img class="misuse-logo" src="assets/logo/logo-icon.svg" alt="" style="transform:rotate(-18deg);" /></div>
+              <figcaption><b>Don't</b> rotate or tilt the logo.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual on-white"><span class="dont-x">✕</span><img class="misuse-logo" src="assets/logo/logo-icon.svg" alt="" style="filter:drop-shadow(3px 5px 4px rgba(0,0,0,.45));" /></div>
+              <figcaption><b>Don't</b> add shadows, outlines, bevels, or other effects.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual on-white"><span class="dont-x">✕</span><img class="misuse-logo" src="assets/logo/logo-icon.svg" alt="" style="filter:invert(.4) sepia(1) saturate(20) hue-rotate(180deg);" /></div>
+              <figcaption><b>Don't</b> recolour the logo outside the approved palette.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual" style="background:url('assets/placeholder/placeholder.png') center/cover;"><span class="dont-x">✕</span><img class="misuse-logo" src="assets/logo/logo-reversed.svg" alt="" style="width:110px;" /></div>
+              <figcaption><b>Don't</b> place the logo on busy imagery without a clear zone.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual on-white"><span class="dont-x">✕</span><img class="misuse-logo" src="assets/logo/logo-icon.svg" alt="" style="opacity:.15;" /></div>
+              <figcaption><b>Don't</b> use low-contrast combinations that bury the mark.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 04 COLOUR ============ -->
+      <section class="section" id="colour" aria-labelledby="colour-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">04</span>
+          <h2 id="colour-h" class="fs-h1 gcol-4-6">Colour</h2>
+          <p class="section-sub fs-body3 gcol-4-6">Four roles — primary, secondary, neutral dark, neutral light. Values update live from the Customize panel.</p>
+        </div>
+
+        <div class="subsection" id="colour-palette">
+          <h3 class="sub-title fs-h5">Palette</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">The four working colours. Click any value below to copy it.</p>
+            <div id="colourSwatches" data-nonedit style="display:flex; flex-direction:column; gap:1.75rem;"></div>
+            <p class="note">The tint strip below each colour is generated from the base value. PMS is the nearest match from a reference table, not a certified spot-colour lookup — confirm against a physical Pantone guide before production.</p>
+          </div>
+        </div>
+
+        <div class="subsection" id="colour-usage">
+          <h3 class="sub-title fs-h5">Usage</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">How much of each colour should show up in a layout.</p>
+            <div class="ratio-bar" data-nonedit>
+              <div class="ratio-seg" style="width:60%; background:var(--brand-neutral-light); color:var(--brand-neutral-dark);">Neutral · 60%</div>
+              <div class="ratio-seg" style="width:30%; background:var(--brand-primary); color:#fff;">Primary · 30%</div>
+              <div class="ratio-seg" style="width:10%; background:var(--brand-secondary); color:#fff;">10%</div>
+            </div>
+            <p class="prose fs-body3">Neutrals carry most of every layout — backgrounds and body text. Primary marks structure and key actions. Secondary is a small, deliberate accent, never a field colour.</p>
+          </div>
+        </div>
+
+        <div class="subsection" id="colour-accessibility">
+          <h3 class="sub-title fs-h5">Accessibility</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Every meaningful colour pair, checked against WCAG AA (4.5:1 for body text).</p>
+            <div style="overflow-x:auto;" data-nonedit>
+              <table class="data-table">
+                <thead><tr><th>Pair</th><th>Preview</th><th>Ratio</th><th>WCAG AA text</th></tr></thead>
+                <tbody id="contrastTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="colour-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <div style="display:flex; gap:.5rem;" data-nonedit>
+                  <span style="width:30px;height:30px;border-radius:50%;background:var(--brand-primary);"></span>
+                  <span style="width:30px;height:30px;border-radius:50%;background:var(--brand-secondary);"></span>
+                  <span style="width:30px;height:30px;border-radius:50%;background:var(--brand-neutral-dark);"></span>
+                  <span style="width:30px;height:30px;border-radius:50%;background:#39FF14; outline:2px solid var(--ink); outline-offset:2px;"></span>
+                </div>
+              </div>
+              <figcaption><b>Don't</b> introduce colours from outside the defined palette.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <div style="background:#D9D9D9; color:#ACACAC; padding: .9rem 1.2rem; border-radius:8px; font-weight:600; font-size:.9375rem;">Can you read this?</div>
+              </div>
+              <figcaption><b>Don't</b> place low-contrast text on any surface — check pairs against AA.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <div style="width:70%; height:60%; border-radius:10px; background:linear-gradient(100deg, var(--brand-primary), var(--brand-secondary));"></div>
+              </div>
+              <figcaption><b>Don't</b> apply unapproved gradients or blends between palette colours.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <div style="width:72%; height:64%; border-radius:10px; background:var(--brand-secondary); padding:.7rem; display:flex; flex-direction:column; gap:.4rem;" data-nonedit>
+                  <span style="height:8px; width:55%; border-radius:4px; background:rgba(255,255,255,.85);"></span>
+                  <span style="height:6px; width:80%; border-radius:4px; background:rgba(255,255,255,.4);"></span>
+                  <span style="height:6px; width:70%; border-radius:4px; background:rgba(255,255,255,.4);"></span>
+                </div>
+              </div>
+              <figcaption><b>Don't</b> flood layouts with the secondary colour — it's an accent, not a background.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 05 TYPOGRAPHY ============ -->
+      <section class="section" id="typography" aria-labelledby="typography-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">05</span>
+          <h2 id="typography-h" class="fs-h1 gcol-4-6">Typography</h2>
+          <p class="section-sub fs-body3 gcol-4-6">One typeface, a fixed scale, and the functional elements built from it. Inter stands in until a brand typeface is licensed.</p>
+        </div>
+
+        <div class="subsection" id="type-typeface">
+          <h3 class="sub-title fs-h5">Typeface</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Inter in regular and italic, across the weights actually in use.</p>
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+                <div>
+                  <span class="field-label">Primary typeface</span>
+                  <h4 class="fs-h5" style="font-size:1.125rem;">Inter <span style="color:var(--t3); font-weight:500; font-size:.85rem;">— grotesque sans</span></h4>
+                </div>
+                <div style="display:flex; gap:.5rem; flex-wrap:wrap;" data-nonedit>
+                  <a class="btn btn-sm" href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+                    Google Fonts
+                  </a>
+                  <button class="btn btn-sm" data-copy="https://fonts.adobe.com/REPLACE_WITH_PROJECT_URL">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy Adobe Fonts link
+                  </button>
+                  <button class="btn btn-sm" data-copy="font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy font CSS
+                  </button>
+                </div>
+              </div>
+              <p class="specimen-glyphs">Aa Bb Cc Gg Rr</p>
+              <p class="specimen-alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />0123456789 &amp;?!@#%</p>
+              <p class="specimen-alpha" style="font-style:italic; margin-top:.4rem;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz</p>
+            </div>
+            <div data-nonedit>
+              <div class="weight-row"><span class="weight-num">400</span><span class="weight-sample" style="font-weight:400;">The quick brown fox jumps over</span><span class="weight-name">Regular</span></div>
+              <div class="weight-row"><span class="weight-num">400i</span><span class="weight-sample" style="font-weight:400; font-style:italic;">The quick brown fox jumps over</span><span class="weight-name">Regular italic</span></div>
+              <div class="weight-row"><span class="weight-num">500</span><span class="weight-sample" style="font-weight:500;">The quick brown fox jumps over</span><span class="weight-name">Medium</span></div>
+              <div class="weight-row"><span class="weight-num">500i</span><span class="weight-sample" style="font-weight:500; font-style:italic;">The quick brown fox jumps over</span><span class="weight-name">Medium italic</span></div>
+              <div class="weight-row"><span class="weight-num">600</span><span class="weight-sample" style="font-weight:600;">The quick brown fox jumps over</span><span class="weight-name">Semibold</span></div>
+              <div class="weight-row"><span class="weight-num">600i</span><span class="weight-sample" style="font-weight:600; font-style:italic;">The quick brown fox jumps over</span><span class="weight-name">Semibold italic</span></div>
+              <div class="weight-row"><span class="weight-num">700</span><span class="weight-sample" style="font-weight:700;">The quick brown fox jumps over</span><span class="weight-name">Bold</span></div>
+              <div class="weight-row"><span class="weight-num">700i</span><span class="weight-sample" style="font-weight:700; font-style:italic;">The quick brown fox jumps over</span><span class="weight-name">Bold italic</span></div>
+              <div class="weight-row"><span class="weight-num">800</span><span class="weight-sample" style="font-weight:800;">The quick brown fox jumps over</span><span class="weight-name">Extrabold</span></div>
+              <div class="weight-row"><span class="weight-num">800i</span><span class="weight-sample" style="font-weight:800; font-style:italic;">The quick brown fox jumps over</span><span class="weight-name">Extrabold italic</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="type-scale">
+          <h3 class="sub-title fs-h5">Scale</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+              <span>Twelve steps, from eyebrow to display. Toggle units and copy any row straight into CSS.</span>
+              <span class="unit-toggle" id="unitToggle" data-nonedit>
+                <button type="button" data-unit="px" class="is-active">PX</button>
+                <button type="button" data-unit="rem">REM</button>
+              </span>
+            </p>
+          </div>
+          <div class="subsection-full">
+            <div class="scale-grid" data-nonedit>
+              <div class="scale-head-cell gcol-1"><span class="fs-eyebrow">Code</span></div>
+              <div class="scale-head-cell gcol-2-4"><span class="fs-eyebrow">Preview</span></div>
+              <div class="scale-head-cell gcol-5"><span class="fs-eyebrow">Measurements</span></div>
+              <div class="scale-head-cell scale-btn-cell gcol-6"></div>
+              <div id="scaleGridBody" style="display:contents;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="type-usage">
+          <h3 class="sub-title fs-h5">Usage</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">How the scale combines in practice. Annotated labels show which role each line plays.</p>
+            <div class="usage-sample">
+              <span class="anno">Eyebrow</span>
+              <span class="eyebrow">[Product launch]</span>
+              <span class="anno">H1</span>
+              <p class="usage-h1">[A headline that makes one clear promise]</p>
+              <span class="anno">Body</span>
+              <p class="usage-body">[Supporting copy that expands the promise in one or two sentences — plain language, active voice, no filler.]</p>
+            </div>
+            <div class="usage-sample">
+              <span class="anno">Eyebrow</span>
+              <span class="eyebrow">[Case study]</span>
+              <span class="anno">H3</span>
+              <p class="usage-h3">[Card title in a compact context]</p>
+              <span class="anno">Caption</span>
+              <p class="usage-caption">[Metadata line · date · category]</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="type-functional">
+          <h3 class="sub-title fs-h5">Functional elements</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">The small UI built from the type system — each with its own copy-to-CSS button.</p>
+
+            <div class="func-block">
+              <h4>Pills &amp; badges</h4>
+              <div class="func-item"><span class="demo"><span class="pill pill-filled">Filled</span></span><button class="copy-btn" data-copy="background:#000; color:#fff; border-radius:999px; padding:5px 12px; font-size:12px; font-weight:700;">CSS</button></div>
+              <div class="func-item"><span class="demo"><span class="pill pill-soft">Soft</span></span><button class="copy-btn" data-copy="background:rgba(0,0,0,.08); color:#000; border-radius:999px; padding:5px 12px; font-size:12px; font-weight:700;">CSS</button></div>
+              <div class="func-item"><span class="demo"><span class="pill pill-outline">Outline</span></span><button class="copy-btn" data-copy="border:1px solid rgba(0,0,0,.14); color:rgba(0,0,0,.58); border-radius:999px; padding:5px 12px; font-size:12px; font-weight:700;">CSS</button></div>
+              <div class="func-item"><span class="demo"><span class="pill pill-outline pill-dot">With status</span></span><button class="copy-btn" data-copy="border:1px solid rgba(0,0,0,.14); border-radius:999px; padding:5px 12px 5px 10px; font-size:12px; font-weight:700; display:inline-flex; align-items:center; gap:6px; /* + 6px dot ::before */">CSS</button></div>
+              <p class="spec">radius 999 · 12/700 · padding 5×12</p>
+            </div>
+
+            <div class="func-block">
+              <h4>Buttons</h4>
+              <div class="func-item"><span class="demo"><button class="btn btn-primary" type="button" tabindex="-1">Primary</button></span><button class="copy-btn" data-copy="background:#000; color:#fff; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600;">CSS</button></div>
+              <div class="func-item"><span class="demo"><button class="btn" type="button" tabindex="-1">Secondary</button></span><button class="copy-btn" data-copy="border:1px solid rgba(0,0,0,.14); color:#000; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600;">CSS</button></div>
+              <div class="func-item"><span class="demo"><button class="btn" type="button" tabindex="-1" style="border-color:transparent;">Ghost</button></span><button class="copy-btn" data-copy="border-color:transparent; color:#000; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600;">CSS</button></div>
+              <div class="func-item"><span class="demo"><button class="btn btn-sm" type="button" tabindex="-1">Small</button></span><button class="copy-btn" data-copy="border:1px solid rgba(0,0,0,.14); border-radius:8px; padding:6px 10px; font-size:12px; font-weight:600;">CSS</button></div>
+              <p class="spec">radius 8 · 13/600 · padding 8×14 · gap 7</p>
+            </div>
+
+            <div class="func-block">
+              <h4>Form fields</h4>
+              <div class="func-item"><span class="demo" style="flex:1;"><div class="field" style="max-width:14rem;"><label for="demoInput">Label</label><input id="demoInput" type="text" placeholder="Placeholder" tabindex="-1" /><span class="hint">Helper text sits here.</span></div></span><button class="copy-btn" data-copy="border:1px solid rgba(0,0,0,.14); border-radius:8px; padding:9px 11px; font-size:14px;">CSS</button></div>
+              <div class="func-item"><span class="demo" style="flex:1;"><div class="field" style="max-width:14rem;"><label for="demoSelect">Select</label><select id="demoSelect" tabindex="-1"><option>Option one</option><option>Option two</option></select></div></span><button class="copy-btn" data-copy="border:1px solid rgba(0,0,0,.14); border-radius:8px; padding:9px 11px; font-size:14px;">CSS</button></div>
+              <p class="spec">radius 8 · 14/400 · border 1px · focus = ink</p>
+            </div>
+
+            <div class="func-block">
+              <h4>Selection controls</h4>
+              <div class="func-item"><span class="demo"><label class="check-row"><input type="checkbox" checked tabindex="-1" /> Checkbox</label></span><button class="copy-btn" data-copy="width:15px; height:15px; accent-color:#000;">CSS</button></div>
+              <div class="func-item"><span class="demo"><label class="check-row"><input type="radio" name="demoRadio" checked tabindex="-1" /> Radio</label></span><button class="copy-btn" data-copy="width:15px; height:15px; accent-color:#000;">CSS</button></div>
+              <div class="func-item"><span class="demo"><label class="check-row"><input type="checkbox" class="switch" checked tabindex="-1" /> Toggle</label></span><button class="copy-btn" data-copy="width:42px; height:24px; border-radius:999px; accent-color:#000;">CSS</button></div>
+              <p class="spec">accent = ink · toggle 42×24 · knob 18</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="type-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><p style="font-size:2rem; font-weight:800; transform:scaleX(.68); letter-spacing:-.02em;">Squeezed</p></div>
+              <figcaption><b>Don't</b> artificially condense, stretch, or slant the typeface.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><p style="font-size:.8125rem; text-transform:uppercase; letter-spacing:.02em; max-width:12rem; line-height:1.5; color:var(--t2);">Long passages set in all caps become genuinely hard work to read.</p></div>
+              <figcaption><b>Don't</b> set body copy in all caps — reserve uppercase for eyebrows.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><p style="font-size:1.2rem; max-width:12rem;"><span style="font-weight:300;">Too</span> <span style="font-weight:900;">many</span> <span style="font-weight:500;">weights</span> <span style="font-weight:700;">in</span> <span style="font-weight:200;">one</span> <span style="font-weight:800;">line</span></p></div>
+              <figcaption><b>Don't</b> mix more than two weights in a single composition.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><p style="font-family:Georgia, 'Times New Roman', serif; font-size:2rem; font-weight:700;">Aa ≠ Aa</p></div>
+              <figcaption><b>Don't</b> substitute system fonts or look-alikes when the brand face is unavailable — load the real file.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><p style="font-size:.75rem; text-align:center; max-width:11rem; color:var(--t2); line-height:1.5;">Centering long paragraphs of body text makes every line start somewhere new and slows the reader down.</p></div>
+              <figcaption><b>Don't</b> centre-align long body copy — keep it left-aligned.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><p style="font-size:1.05rem; letter-spacing:.5em; font-weight:600;">SPACED</p></div>
+              <figcaption><b>Don't</b> apply extreme tracking to headlines or body text.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 06 PHOTOGRAPHY ============ -->
+      <section class="section" id="photography" aria-labelledby="photography-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">06</span>
+          <h2 id="photography-h" class="fs-h1 gcol-4-6">Photography</h2>
+          <p class="section-sub fs-body3 gcol-4-6">What gets shot, how it's lit, and how it's treated. Replace the files in <span class="mono">assets/photography/</span>.</p>
+        </div>
+
+        <div class="subsection" id="photo-direction">
+          <h3 class="sub-title fs-h5">Direction</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Four decisions that keep every shoot consistent.</p>
+            <div><span class="field-label">Lighting</span><p class="placeholder-text fs-body2">[Natural / studio / high-key — pick one direction and stick to it.]</p></div>
+            <div><span class="field-label">Framing</span><p class="placeholder-text fs-body2">[Candid vs. posed, crop ratios, how much negative space.]</p></div>
+            <div><span class="field-label">Colour treatment</span><p class="placeholder-text fs-body2">[Grade, saturation, and any filter rules.]</p></div>
+            <div><span class="field-label">Subject</span><p class="placeholder-text fs-body2">[What's always — and never — in frame.]</p></div>
+          </div>
+        </div>
+
+        <div class="subsection" id="photo-examples">
+          <h3 class="sub-title fs-h5">Examples</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">What the direction above looks like in frame.</p>
+            <figure class="tile is-wide"><img src="assets/photography/photo-01.png" alt="Photography example 1" loading="lazy" /><figcaption><b>[On-brand]</b> · [natural light, genuine moment]</figcaption></figure>
+            <figure class="tile is-wide"><img src="assets/photography/photo-02.png" alt="Photography example 2" loading="lazy" /><figcaption><b>[On-brand]</b> · [true-to-subject colour]</figcaption></figure>
+            <figure class="tile is-wide"><img src="assets/photography/photo-03.png" alt="Photography example 3" loading="lazy" /><figcaption><b>[On-brand]</b> · [consistent crop ratio]</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="subsection" id="photo-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><img src="assets/photography/photo-04.png" alt="" style="width:100%; height:100%; object-fit:cover; filter:saturate(2.8) contrast(1.35) hue-rotate(18deg);" /></div>
+              <figcaption><b>Don't</b> push heavy filters or grades that fight the natural palette.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span><img src="assets/photography/photo-04.png" alt="" style="width:60%; height:100%; object-fit:fill; transform:scaleY(1.35);" /></div>
+              <figcaption><b>Don't</b> stretch or distort images to fill a layout — crop instead.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual" style="background:url('assets/photography/photo-04.png') center/cover;"><span class="dont-x">✕</span><p style="color:rgba(255,255,255,.45); font-size:.8125rem; font-weight:600; max-width:10rem; text-align:center;">Text lost in a busy image</p></div>
+              <figcaption><b>Don't</b> set text over busy areas without a clear zone or scrim.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual" style="gap:.5rem; padding:1rem;"><span class="dont-x">✕</span>
+                <img src="assets/photography/photo-04.png" alt="" style="width:34%; aspect-ratio:1/1.6; object-fit:cover; border-radius:6px;" />
+                <img src="assets/photography/photo-04.png" alt="" style="width:52%; aspect-ratio:16/7; object-fit:cover; border-radius:6px;" />
+              </div>
+              <figcaption><b>Don't</b> mix aspect ratios inside one layout or grid.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 07 ILLUSTRATION ============ -->
+      <section class="section" id="illustration" aria-labelledby="illustration-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">07</span>
+          <h2 id="illustration-h" class="fs-h1 gcol-4-6">Illustration</h2>
+          <p class="section-sub fs-body3 gcol-4-6">Where drawn assets replace photography, and how they're constructed. Replace the files in <span class="mono">assets/illustration/</span>.</p>
+        </div>
+
+        <div class="subsection" id="illo-style">
+          <h3 class="sub-title fs-h5">Style</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">The rules that keep every illustration recognisably part of one system.</p>
+            <div><span class="field-label">Line weight</span><p class="placeholder-text fs-body2">[e.g. 2px, consistent across every asset]</p></div>
+            <div><span class="field-label">Palette</span><p class="placeholder-text fs-body2">[Which of the four core colours apply]</p></div>
+            <div><span class="field-label">Style</span><p class="placeholder-text fs-body2">[Flat / linear / isometric — pick one]</p></div>
+            <div><span class="field-label">When to use</span><p class="placeholder-text fs-body2">[Concepts and abstractions; photography for real people and places]</p></div>
+          </div>
+        </div>
+
+        <div class="subsection" id="illo-examples">
+          <h3 class="sub-title fs-h5">Examples</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">The style above, applied.</p>
+            <figure class="tile is-square"><img src="assets/illustration/illustration-01.png" alt="Illustration example 1" loading="lazy" /><figcaption><b>Illustration 01</b></figcaption></figure>
+            <figure class="tile is-square"><img src="assets/illustration/illustration-02.png" alt="Illustration example 2" loading="lazy" /><figcaption><b>Illustration 02</b></figcaption></figure>
+            <figure class="tile is-square"><img src="assets/illustration/illustration-03.png" alt="Illustration example 3" loading="lazy" /><figcaption><b>Illustration 03</b></figcaption></figure>
+            <figure class="tile is-square"><img src="assets/illustration/illustration-04.png" alt="Illustration example 4" loading="lazy" /><figcaption><b>Illustration 04</b></figcaption></figure>
+          </div>
+        </div>
+
+        <div class="subsection" id="illo-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual" style="gap:1.2rem;"><span class="dont-x">✕</span>
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><rect x="6" y="6" width="40" height="40" rx="8" stroke="currentColor" stroke-width="2.5"/><circle cx="26" cy="26" r="9" fill="currentColor"/></svg>
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><path d="M8 38c6-16 10-24 16-24s6 12 10 14 8-6 10-10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M12 42c8-4 22-2 28-8" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
+              </div>
+              <figcaption><b>Don't</b> mix illustration styles in a single piece — geometric and hand-drawn don't share a canvas.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <svg width="72" height="52" viewBox="0 0 72 52" data-nonedit><rect x="2" y="8" width="20" height="36" rx="5" fill="#39FF14"/><rect x="26" y="8" width="20" height="36" rx="5" fill="#B026FF"/><rect x="50" y="8" width="20" height="36" rx="5" fill="#FFE500"/></svg>
+              </div>
+              <figcaption><b>Don't</b> colour illustrations outside the brand palette.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <svg width="84" height="52" viewBox="0 0 84 52" fill="none"><path d="M6 14h72" stroke="currentColor" stroke-width="1"/><path d="M6 27h72" stroke="currentColor" stroke-width="3.5"/><path d="M6 41h72" stroke="currentColor" stroke-width="7"/></svg>
+              </div>
+              <figcaption><b>Don't</b> vary line weight within one illustration system.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 08 ICONOGRAPHY ============ -->
+      <section class="section" id="iconography" aria-labelledby="iconography-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">08</span>
+          <h2 id="iconography-h" class="fs-h1 gcol-4-6">Iconography</h2>
+          <p class="section-sub fs-body3 gcol-4-6">A small, consistent set — one grid, one stroke, no exceptions.</p>
+        </div>
+
+        <div class="subsection" id="icon-spec">
+          <h3 class="sub-title fs-h5">Grid &amp; stroke</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">One geometry, applied to every glyph in the set.</p>
+            <div><span class="field-label">Grid</span><p class="fs-body2">24 × 24 px</p></div>
+            <div><span class="field-label">Stroke</span><p class="fs-body2">2 px · rounded caps</p></div>
+            <div><span class="field-label">Padding</span><p class="fs-body2">2 px inset from grid edge</p></div>
+            <div><span class="field-label">Corners</span><p class="fs-body2">2 px radius on joins</p></div>
+          </div>
+        </div>
+
+        <div class="subsection" id="icon-library">
+          <h3 class="sub-title fs-h5">Library</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Every icon shares the same grid and stroke — extend the set without breaking that consistency. Six per row.</p>
+          </div>
+          <div class="subsection-full">
+            <div class="g6" id="iconGrid" style="row-gap:.75rem;" data-nonedit></div>
+          </div>
+        </div>
+
+        <div class="subsection" id="icon-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual" style="gap:1.2rem;"><span class="dont-x">✕</span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+              </div>
+              <figcaption><b>Don't</b> mix stroke weights across the set.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual" style="gap:1.2rem;"><span class="dont-x">✕</span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 1 7 7c0 5 2 6 2 6H3s2-1 2-6a7 7 0 0 1 7-7zM10 21a2.5 2.5 0 0 0 4 0"/></svg>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+              <figcaption><b>Don't</b> drop filled icons into an outlined set.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <div style="border:1px dashed var(--t3); padding:2px; display:flex;" data-nonedit>
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="transform:scale(1.45); transform-origin:center;"><circle cx="12" cy="12" r="3"/><path d="M4 12h2M18 12h2M12 4v2M12 18v2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4"/></svg>
+                </div>
+              </div>
+              <figcaption><b>Don't</b> scale icons off the 24px grid — they overflow their container and blur.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <button class="icon-btn" type="button" tabindex="-1" aria-hidden="true" style="pointer-events:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></svg></button>
+              </div>
+              <figcaption><b>Don't</b> rely on an icon alone for destructive actions — pair it with a label.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 09 MOTION ============ -->
+      <section class="section" id="motion" aria-labelledby="motion-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">09</span>
+          <h2 id="motion-h" class="fs-h1 gcol-4-6">Motion</h2>
+          <p class="section-sub fs-body3 gcol-4-6">Timing and easing tokens. Hover or tap any track to feel the difference.</p>
+        </div>
+
+        <div class="subsection" id="motion-tokens">
+          <h3 class="sub-title fs-h5">Tokens</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Duration and easing values — copy either straight into CSS.</p>
+            <div>
+              <span class="field-label">Duration</span>
+              <div id="durationTokens" data-nonedit></div>
+            </div>
+            <div>
+              <span class="field-label">Easing</span>
+              <div id="easingTokens" data-nonedit></div>
+            </div>
+            <div style="max-width:22rem;">
+              <span class="field-label">Reference clip</span>
+              <figure class="tile is-wide">
+                <div style="position:relative;">
+                  <img src="assets/motion/clip-poster.png" alt="Motion reference placeholder" loading="lazy" />
+                  <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;"><span style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z"/></svg></span></span>
+                </div>
+                <figcaption>[Replace with a Lottie / video export in <span class="mono">assets/motion/</span>]</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="motion-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual" style="padding:1rem;"><span class="dont-x">✕</span>
+                <div class="motion-track" style="width:80%;" data-easing="cubic-bezier(.6,-0.55,.3,1.6)" data-duration="600"><div class="motion-dot"></div></div>
+              </div>
+              <figcaption><b>Don't</b> use bounce or elastic easing for UI feedback — hover to feel why.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual"><span class="dont-x">✕</span>
+                <div class="pulse-group" aria-hidden="true"><span></span><span></span><span></span></div>
+              </div>
+              <figcaption><b>Don't</b> animate everything at once — constant motion exhausts attention.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual" style="padding:1rem;"><span class="dont-x">✕</span>
+                <div class="motion-track" style="width:80%;" data-duration="1400"><div class="motion-dot"></div></div>
+              </div>
+              <figcaption><b>Don't</b> exceed ~400ms for interface feedback — this 1400ms track feels broken.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 10 VOICE & TONE ============ -->
+      <section class="section" id="voice" aria-labelledby="voice-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">10</span>
+          <h2 id="voice-h" class="fs-h1 gcol-4-6">Voice &amp; Tone</h2>
+          <p class="section-sub fs-body3 gcol-4-6">How the brand sounds in writing — positioned on a scale, then shown in practice.</p>
+        </div>
+
+        <div class="subsection" id="voice-personality">
+          <h3 class="sub-title fs-h5">Personality</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Where the brand sits on each scale, at a glance.</p>
+            <div class="slider-row" data-nonedit>
+              <div class="slider-labels"><span>Formal</span><span>Casual</span></div>
+              <div class="slider-track"><div class="slider-marker" style="left:65%;"></div></div>
+            </div>
+            <div class="slider-row" data-nonedit>
+              <div class="slider-labels"><span>Reserved</span><span>Playful</span></div>
+              <div class="slider-track"><div class="slider-marker" style="left:45%;"></div></div>
+            </div>
+            <div class="slider-row" data-nonedit>
+              <div class="slider-labels"><span>Corporate</span><span>Human</span></div>
+              <div class="slider-track"><div class="slider-marker" style="left:80%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="voice-writing">
+          <h3 class="sub-title fs-h5">Writing</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">The tone in practice, and the rules behind it.</p>
+            <div>
+              <span class="field-label">Sounds like us</span>
+              <p class="quote-card">Your order's on the way — we'll text you the moment it arrives.</p>
+            </div>
+            <ul class="prose fs-body2" style="display:flex; flex-direction:column; gap:.4rem;">
+              <li>— Write in second person, active voice.</li>
+              <li>— Say exactly what happens next; skip the ceremony.</li>
+              <li>— One voice across every channel — support, marketing, product.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection" id="voice-vocab">
+          <h3 class="sub-title fs-h5">Vocabulary</h3>
+          <div class="subsection-body">
+            <p class="prose fs-body2">Words that sound like us, and the corporate-speak we swap them for.</p>
+            <div class="word-cols">
+              <div class="word-col"><h4>Use</h4><ul data-nonedit>
+                <li class="word-chip">help</li><li class="word-chip">show</li><li class="word-chip">start</li><li class="word-chip">you</li>
+              </ul></div>
+              <div class="word-col"><h4>Avoid</h4><ul data-nonedit>
+                <li class="word-chip is-avoid">utilize</li><li class="word-chip is-avoid">leverage synergy</li><li class="word-chip is-avoid">commence</li><li class="word-chip is-avoid">the user</li>
+              </ul></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="voice-misuse">
+          <h3 class="sub-title fs-h5">Misuse</h3>
+          <div class="subsection-full">
+          <div class="dont-grid">
+            <figure class="dont-card">
+              <div class="dont-visual" style="padding:1.1rem;"><span class="dont-x">✕</span>
+                <p class="quote-card" style="font-size:.8438rem; color:var(--t2);">Our synergistic platform empowers stakeholders to leverage best-in-class solutions.</p>
+              </div>
+              <figcaption><b>Don't</b> use jargon the audience wouldn't say out loud.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual" style="padding:1.1rem;"><span class="dont-x">✕</span>
+                <p class="quote-card" style="font-size:.8438rem; color:var(--t2);">Oops! Something went wrong. Sorry about that!</p>
+              </div>
+              <figcaption><b>Don't</b> apologise vaguely — explain what happened and what to do next.</figcaption>
+            </figure>
+            <figure class="dont-card">
+              <div class="dont-visual" style="padding:1.1rem;"><span class="dont-x">✕</span>
+                <p class="quote-card" style="font-size:.8438rem; color:var(--t2); text-transform:uppercase;">Buy now!!! Limited time!!! Don't miss out!!!</p>
+              </div>
+              <figcaption><b>Don't</b> shout — urgency comes from clarity, not punctuation.</figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 11 RESOURCES ============ -->
+      <section class="section" id="resources" aria-labelledby="resources-h">
+        <div class="section-head g6">
+          <span class="section-index fs-h1 mono gcol-1-3">11</span>
+          <h2 id="resources-h" class="fs-h1 gcol-4-6">Resources</h2>
+          <p class="section-sub fs-body3 gcol-4-6">Where the real files live. Point every row at the brand's actual library.</p>
+        </div>
+
+        <div class="subsection" id="resources-library">
+          <h3 class="sub-title fs-h5">Library</h3>
+          <div class="subsection-body">
+            <div style="overflow-x:auto;">
+              <table class="res-table">
+                <tbody>
+                  <tr>
+                    <td><p class="res-name">Logo files</p><p class="res-meta">All lockups as SVG — also in <span class="mono">assets/logo/</span></p></td>
+                    <td><span class="res-format">.svg</span></td>
+                    <td>
+                      <div class="res-actions" data-nonedit>
+                        <a class="btn btn-sm" href="assets/logo/logo-primary.svg" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><p class="res-name">Placeholder imagery</p><p class="res-meta">Replace files in <span class="mono">assets/moodboard · photography · illustration · motion</span></p></td>
+                    <td><span class="res-format">.png</span></td>
+                    <td>
+                      <div class="res-actions" data-nonedit>
+                        <a class="btn btn-sm" href="assets/placeholder/placeholder.png" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Master file</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><p class="res-name">Full guidelines as PDF</p><p class="res-meta">This document, exported via the print dialog</p></td>
+                    <td><span class="res-format">.pdf</span></td>
+                    <td>
+                      <div class="res-actions" data-nonedit>
+                        <button class="btn btn-sm" id="printBtn2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>Print / Save PDF</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><p class="res-name">Reference &amp; asset library</p><p class="res-meta">[Replace with the brand's Google Drive / DAM link]</p></td>
+                    <td><span class="res-format">Drive</span></td>
+                    <td>
+                      <div class="res-actions" data-nonedit>
+                        <button class="icon-btn" data-copy="https://drive.google.com/REPLACE_WITH_YOUR_FOLDER" title="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                        <a class="btn btn-sm" href="#" onclick="return false;" aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>Open</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><p class="res-name">Typeface — Inter</p><p class="res-meta">Google Fonts · swap for the licensed brand face</p></td>
+                    <td><span class="res-format">Web</span></td>
+                    <td>
+                      <div class="res-actions" data-nonedit>
+                        <button class="icon-btn" data-copy="https://fonts.google.com/specimen/Inter" title="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                        <a class="btn btn-sm" href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>Open</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><p class="res-name">Component library</p><p class="res-meta">[Replace with the brand's Figma file link]</p></td>
+                    <td><span class="res-format">Figma</span></td>
+                    <td>
+                      <div class="res-actions" data-nonedit>
+                        <button class="icon-btn" data-copy="https://figma.com/REPLACE_WITH_YOUR_FILE" title="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                        <a class="btn btn-sm" href="#" onclick="return false;" aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>Open</a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <footer class="doc-footer">
+          <p>Brand guidelines template · v0.1 · every element is a placeholder</p>
+          <p>Last updated 18 Jul 2026</p>
+        </footer>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer" aria-label="Customize">
+  <div class="drawer-head">
+    <div style="flex:1;"><h3>Customize</h3><p>Changes preview live and are saved to this browser.</p></div>
+    <button class="icon-btn" id="drawerClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-field">
+      <label for="inputBrandName">Brand name</label>
+      <input type="text" id="inputBrandName" value="Brand Name" />
+    </div>
+    <div class="drawer-field">
+      <label for="inputPrimary">Primary</label>
+      <div class="color-field"><input type="color" id="inputPrimary" value="#E32636" /><input type="text" id="inputPrimaryHex" value="#E32636" aria-label="Primary hex value" /></div>
+    </div>
+    <div class="drawer-field">
+      <label for="inputSecondary">Secondary</label>
+      <div class="color-field"><input type="color" id="inputSecondary" value="#14383E" /><input type="text" id="inputSecondaryHex" value="#14383E" aria-label="Secondary hex value" /></div>
+    </div>
+    <div class="drawer-field">
+      <label for="inputNeutralDark">Neutral dark</label>
+      <div class="color-field"><input type="color" id="inputNeutralDark" value="#111111" /><input type="text" id="inputNeutralDarkHex" value="#111111" aria-label="Neutral dark hex value" /></div>
+    </div>
+    <div class="drawer-field">
+      <label for="inputNeutralLight">Neutral light</label>
+      <div class="color-field"><input type="color" id="inputNeutralLight" value="#F4F4F2" /><input type="text" id="inputNeutralLightHex" value="#F4F4F2" aria-label="Neutral light hex value" /></div>
+    </div>
+
+    <div class="drawer-divider"></div>
+
+    <div class="drawer-field">
+      <label>Page text</label>
+      <button class="btn" id="editToggle" type="button" aria-pressed="false" style="width:100%; justify-content:center;">Turn on text editing</button>
+      <p class="drawer-hint">When editing is on, click any heading, paragraph, or list item in the page and type. Edits are saved to this browser only — the underlying file is untouched.</p>
+    </div>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-sm" id="resetTokens" style="justify-content:center;">Reset name &amp; colours</button>
+    <button class="btn btn-sm" id="resetTexts" style="justify-content:center;">Reset all text edits</button>
+  </div>
+</aside>
+
+<div class="edit-hint" id="editHint" hidden>
+  <span>Editing on — click any text to change it</span>
+  <button id="editDone" type="button">Done</button>
+</div>
+
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var shell = document.getElementById('shell');
+  var content = document.getElementById('main-content');
+  var storage = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+  };
+
+  /* ================= navigation config (Colour now 04, Typography 05) ================= */
+  var NAV = [
+    { id: 'overview', num: '01', label: 'Overview', kw: ['about', 'brand', 'intro'], subs: [
+      { id: 'introduction', label: 'Introduction', kw: ['about', 'story'] },
+      { id: 'strategy', label: 'Strategy', kw: ['mission', 'positioning', 'pillars'] },
+      { id: 'basics', label: 'The Basics', kw: ['terminology', 'glossary', 'hex', 'rgb', 'cmyk', 'pantone', 'formats', 'svg', 'png', 'eps', 'how to use'] }
+    ]},
+    { id: 'moodboard', num: '02', label: 'Moodboard', kw: ['references', 'inspiration', 'gallery'], subs: [
+      { id: 'moodboard-gallery', label: 'Gallery', kw: ['images', 'references'] },
+      { id: 'moodboard-keywords', label: 'Keywords', kw: ['adjectives', 'art direction'] }
+    ]},
+    { id: 'logo', num: '03', label: 'Logo', kw: ['mark', 'lockup', 'wordmark'], subs: [
+      { id: 'logo-variations', label: 'Variations', kw: ['reversed', 'icon', 'primary'] },
+      { id: 'logo-grid', label: 'Grid', kw: ['construction', 'proportions', 'module'] },
+      { id: 'logo-clearspace', label: 'Clear space & size', kw: ['clear space', 'minimum', 'spacing'] },
+      { id: 'logo-files', label: 'Files', kw: ['download', 'svg', 'assets', 'copy'] },
+      { id: 'logo-misuse', label: 'Misuse', kw: ['dont', "don't", 'stretch', 'rotate'] }
+    ]},
+    { id: 'colour', num: '04', label: 'Colour', kw: ['color', 'palette'], subs: [
+      { id: 'colour-palette', label: 'Palette', kw: ['swatches', 'hex', 'primary', 'secondary', 'neutral', 'tints', 'pms', 'pantone'] },
+      { id: 'colour-usage', label: 'Usage', kw: ['ratio', '60 30 10'] },
+      { id: 'colour-accessibility', label: 'Accessibility', kw: ['contrast', 'wcag', 'aa'] },
+      { id: 'colour-misuse', label: 'Misuse', kw: ['dont', "don't", 'gradient'] }
+    ]},
+    { id: 'typography', num: '05', label: 'Typography', kw: ['type', 'font', 'inter'], subs: [
+      { id: 'type-typeface', label: 'Typeface', kw: ['weights', 'specimen', 'inter', 'italic'] },
+      { id: 'type-scale', label: 'Scale', kw: ['sizes', 'eyebrow', 'display', 'h1', 'h4', 'h5', 'h6', 'body', 'caption', 'px', 'rem'] },
+      { id: 'type-usage', label: 'Usage', kw: ['hierarchy', 'samples', 'pairing'] },
+      { id: 'type-functional', label: 'Functional elements', kw: ['buttons', 'pills', 'badges', 'forms', 'inputs', 'fields', 'toggle', 'checkbox', 'ui'] },
+      { id: 'type-misuse', label: 'Misuse', kw: ['dont', "don't", 'caps', 'condense'] }
+    ]},
+    { id: 'photography', num: '06', label: 'Photography', kw: ['photo', 'imagery', 'images'], subs: [
+      { id: 'photo-direction', label: 'Direction', kw: ['lighting', 'framing', 'subject'] },
+      { id: 'photo-examples', label: 'Examples', kw: [] },
+      { id: 'photo-misuse', label: 'Misuse', kw: ['dont', "don't", 'filters', 'stock'] }
+    ]},
+    { id: 'illustration', num: '07', label: 'Illustration', kw: ['drawing', 'illo'], subs: [
+      { id: 'illo-style', label: 'Style', kw: ['line weight'] },
+      { id: 'illo-examples', label: 'Examples', kw: [] },
+      { id: 'illo-misuse', label: 'Misuse', kw: ['dont', "don't"] }
+    ]},
+    { id: 'iconography', num: '08', label: 'Iconography', kw: ['icons'], subs: [
+      { id: 'icon-spec', label: 'Grid & stroke', kw: ['24px', 'grid', 'stroke'] },
+      { id: 'icon-library', label: 'Library', kw: ['set', 'icons'] },
+      { id: 'icon-misuse', label: 'Misuse', kw: ['dont', "don't"] }
+    ]},
+    { id: 'motion', num: '09', label: 'Motion', kw: ['animation'], subs: [
+      { id: 'motion-tokens', label: 'Tokens', kw: ['duration', 'easing', 'timing', 'ms'] },
+      { id: 'motion-misuse', label: 'Misuse', kw: ['dont', "don't", 'bounce'] }
+    ]},
+    { id: 'voice', num: '10', label: 'Voice & Tone', kw: ['writing', 'copy', 'tone'], subs: [
+      { id: 'voice-personality', label: 'Personality', kw: ['formal', 'casual', 'sliders'] },
+      { id: 'voice-writing', label: 'Writing', kw: ['samples', 'in practice'] },
+      { id: 'voice-vocab', label: 'Vocabulary', kw: ['words', 'avoid'] },
+      { id: 'voice-misuse', label: 'Misuse', kw: ['dont', "don't", 'jargon'] }
+    ]},
+    { id: 'resources', num: '11', label: 'Resources', kw: ['downloads', 'links', 'drive', 'figma', 'fonts', 'library', 'assets'], subs: [
+      { id: 'resources-library', label: 'Library', kw: ['downloads', 'links'] }
+    ]}
+  ];
+  var EXTRA_SEARCH = [
+    { id: 'design-approach', num: '01', label: 'Design approach', parentLabel: 'Overview', kw: ['principles', 'approach'] }
+  ];
+  var parentOf = {};
+  NAV.forEach(function (g) { g.subs.forEach(function (s) { parentOf[s.id] = g.id; }); });
+  parentOf['design-approach'] = 'overview';
+
+  /* ---------- build sidebar nav ---------- */
+  var navList = document.getElementById('navList');
+  var chevronSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>';
+  navList.innerHTML = NAV.map(function (g) {
+    var divider = (g.id === 'logo' || g.id === 'resources') ? '<li class="nav-divider" role="separator"></li>' : '';
+    var chev = g.subs.length
+      ? '<button class="nav-chevron" type="button" aria-expanded="false" aria-label="Toggle ' + g.label + ' subsections">' + chevronSvg + '</button>'
+      : '';
+    var subs = g.subs.length
+      ? '<div class="nav-sub"><ul>' + g.subs.map(function (s) {
+          return '<li><a href="#' + s.id + '" data-subnav>' + s.label + '</a></li>';
+        }).join('') + '</ul></div>'
+      : '';
+    return divider +
+      '<li class="nav-group" data-group="' + g.id + '">' +
+        '<div class="nav-row">' +
+          '<a class="nav-link" href="#' + g.id + '" data-nav><span class="nav-num">' + g.num + '</span><span class="nav-label">' + g.label + '</span></a>' +
+          chev +
+        '</div>' + subs +
+      '</li>';
+  }).join('');
+
+  /* ================= theme ================= */
+  function applyTheme(mode) {
+    root.setAttribute('data-theme', mode);
+    document.getElementById('themeIconSun').style.display = mode === 'dark' ? 'none' : 'block';
+    document.getElementById('themeIconMoon').style.display = mode === 'dark' ? 'block' : 'none';
+    document.getElementById('themeToggle').setAttribute('aria-pressed', mode === 'dark');
+  }
+  var savedTheme = storage.get('bg-theme');
+  applyTheme(savedTheme || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    storage.set('bg-theme', next);
+  });
+
+  /* ================= sidebar collapse / mobile ================= */
+  var railToggle = document.getElementById('railToggle');
+  function applyCollapsed(c) {
+    shell.classList.toggle('is-collapsed', c);
+    railToggle.setAttribute('aria-pressed', c);
+    railToggle.title = c ? 'Expand sidebar' : 'Collapse sidebar';
+  }
+  applyCollapsed(storage.get('bg-collapsed') === '1');
+  railToggle.addEventListener('click', function () {
+    var c = !shell.classList.contains('is-collapsed');
+    applyCollapsed(c);
+    storage.set('bg-collapsed', c ? '1' : '0');
+  });
+
+  var navToggle = document.getElementById('navToggle');
+  function setNavOpen(open) {
+    shell.classList.toggle('is-nav-open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  }
+  navToggle.addEventListener('click', function () { setNavOpen(!shell.classList.contains('is-nav-open')); });
+  document.getElementById('navOverlay').addEventListener('click', function () { setNavOpen(false); });
+
+  /* ================= accordion ================= */
+  function openGroup(id) {
+    document.querySelectorAll('.nav-group').forEach(function (g) {
+      var on = g.getAttribute('data-group') === id;
+      g.classList.toggle('is-open', on);
+      var chev = g.querySelector('.nav-chevron');
+      if (chev) chev.setAttribute('aria-expanded', on);
+    });
+  }
+  function closeAllGroups() { openGroup('__none__'); }
+  navList.addEventListener('click', function (e) {
+    var chev = e.target.closest('.nav-chevron');
+    if (chev) {
+      var group = chev.closest('.nav-group');
+      if (group.classList.contains('is-open')) { closeAllGroups(); }
+      else { openGroup(group.getAttribute('data-group')); }
+      return;
+    }
+    var link = e.target.closest('a[href^="#"]');
+    if (link) {
+      e.preventDefault();
+      navigateTo(link.getAttribute('href').slice(1));
+    }
+  });
+
+  /* ================= navigate + flash ================= */
+  function navigateTo(id) {
+    var target = document.getElementById(id);
+    if (!target) return;
+    var parent = parentOf[id] || id;
+    openGroup(parent);
+    setNavOpen(false);
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () {
+      var top = target.getBoundingClientRect().top;
+      if (Math.abs(top - 24) > 120) target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }, 600);
+    history.replaceState(null, '', '#' + id);
+    var flashEl = target.classList.contains('section') ? target.querySelector('.section-head') : target;
+    if (flashEl) {
+      flashEl.classList.remove('flash');
+      void flashEl.offsetWidth;
+      flashEl.classList.add('flash');
+      setTimeout(function () { flashEl.classList.remove('flash'); }, 1500);
+    }
+  }
+
+  /* ================= scrollspy ================= */
+  function setActive(id) {
+    var parent = parentOf[id] || id;
+    document.querySelectorAll('.nav-link').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('href') === '#' + parent);
+    });
+    document.querySelectorAll('[data-subnav]').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('href') === '#' + id);
+    });
+  }
+  var spyTargets = [];
+  NAV.forEach(function (g) {
+    var el = document.getElementById(g.id);
+    if (el) spyTargets.push(el);
+    g.subs.forEach(function (s) { var e2 = document.getElementById(s.id); if (e2) spyTargets.push(e2); });
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      var vis = entries.filter(function (en) { return en.isIntersecting; });
+      if (vis.length) {
+        vis.sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+        setActive(vis[0].target.id);
+      }
+    }, { rootMargin: '-12% 0px -74% 0px' });
+    spyTargets.forEach(function (t) { io.observe(t); });
+  }
+
+  /* ================= search ================= */
+  var searchWrap = document.getElementById('searchWrap');
+  var searchInput = document.getElementById('searchInput');
+  var sugBox = document.getElementById('searchSug');
+  var searchMsg = document.getElementById('searchMsg');
+  var searchEntries = [];
+  NAV.forEach(function (g) {
+    searchEntries.push({ id: g.id, num: g.num, label: g.label, parentLabel: null, kw: g.kw });
+    g.subs.forEach(function (s) {
+      searchEntries.push({ id: s.id, num: g.num, label: s.label, parentLabel: g.label, kw: s.kw });
+    });
+  });
+  EXTRA_SEARCH.forEach(function (x) { searchEntries.push(x); });
+
+  var matches = [];
+  var activeIdx = -1;
+  function findMatches(q) {
+    q = q.trim().toLowerCase();
+    if (!q) return [];
+    return searchEntries.filter(function (en) {
+      if (en.label.toLowerCase().indexOf(q) !== -1) return true;
+      if (en.parentLabel && en.parentLabel.toLowerCase().indexOf(q) !== -1) return true;
+      return en.kw.some(function (k) { return k.indexOf(q) !== -1; });
+    }).slice(0, 7);
+  }
+  function renderSug() {
+    if (!matches.length) { sugBox.hidden = true; searchInput.setAttribute('aria-expanded', 'false'); return; }
+    sugBox.innerHTML = matches.map(function (m, i) {
+      var crumbTxt = m.parentLabel ? m.parentLabel + ' — <b>' + m.label + '</b>' : '<b>' + m.label + '</b>';
+      return '<button type="button" class="sug-item' + (i === activeIdx ? ' is-active' : '') + '" role="option" data-idx="' + i + '"><span class="sug-num">' + m.num + '</span><span>' + crumbTxt + '</span></button>';
+    }).join('');
+    sugBox.hidden = false;
+    searchInput.setAttribute('aria-expanded', 'true');
+  }
+  function clearSearchError() {
+    searchWrap.classList.remove('is-error');
+    searchMsg.hidden = true;
+    searchInput.removeAttribute('aria-invalid');
+  }
+  function searchError(q) {
+    sugBox.hidden = true;
+    searchWrap.classList.remove('is-error');
+    void searchWrap.offsetWidth;
+    searchWrap.classList.add('is-error');
+    searchMsg.textContent = 'No results for “' + q + '”';
+    searchMsg.hidden = false;
+    searchInput.setAttribute('aria-invalid', 'true');
+  }
+  function goTo(entry) {
+    sugBox.hidden = true;
+    clearSearchError();
+    searchInput.value = '';
+    navigateTo(entry.id);
+  }
+  searchInput.addEventListener('input', function () {
+    clearSearchError();
+    matches = findMatches(searchInput.value);
+    activeIdx = -1;
+    renderSug();
+  });
+  searchInput.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (matches.length) { activeIdx = (activeIdx + 1) % matches.length; renderSug(); } }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); if (matches.length) { activeIdx = (activeIdx - 1 + matches.length) % matches.length; renderSug(); } }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      var q = searchInput.value.trim();
+      if (!q) return;
+      if (matches.length) { goTo(matches[activeIdx >= 0 ? activeIdx : 0]); }
+      else { searchError(q); }
+    } else if (e.key === 'Escape') { sugBox.hidden = true; }
+  });
+  sugBox.addEventListener('mousedown', function (e) {
+    var item = e.target.closest('.sug-item');
+    if (item) { e.preventDefault(); goTo(matches[parseInt(item.getAttribute('data-idx'), 10)]); }
+  });
+  document.addEventListener('click', function (e) {
+    if (!searchWrap.contains(e.target)) sugBox.hidden = true;
+  });
+
+  /* ================= toast + copy ================= */
+  var toastWrap = document.getElementById('toastWrap');
+  function showToast(msg) {
+    var t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    toastWrap.appendChild(t);
+    requestAnimationFrame(function () { t.classList.add('is-visible'); });
+    setTimeout(function () {
+      t.classList.remove('is-visible');
+      setTimeout(function () { t.remove(); }, 200);
+    }, 1600);
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () { fallbackCopy(text); });
+    } else { fallbackCopy(text); }
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-copy]');
+    if (!btn) return;
+    var v = btn.getAttribute('data-copy');
+    copyText(v);
+    showToast('Copied ' + (v.length > 42 ? v.slice(0, 42) + '…' : v));
+  });
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-copy-svg]');
+    if (!btn) return;
+    var url = btn.getAttribute('data-copy-svg');
+    fetch(url).then(function (r) { return r.text(); }).then(function (txt) {
+      copyText(txt.trim());
+      showToast('Copied SVG source');
+    }).catch(function () { showToast('Could not read SVG file'); });
+  });
+
+  /* ================= print ================= */
+  function doPrint() { window.print(); }
+  document.getElementById('printBtn').addEventListener('click', doPrint);
+  var pb2 = document.getElementById('printBtn2');
+  if (pb2) pb2.addEventListener('click', doPrint);
+
+  /* ================= moodboard filter ================= */
+  var moodChips = document.getElementById('moodChips');
+  var moodTiles = Array.prototype.slice.call(document.querySelectorAll('#moodGrid .tile'));
+  moodChips.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    Array.prototype.slice.call(moodChips.children).forEach(function (c) { c.classList.remove('is-active'); });
+    chip.classList.add('is-active');
+    var tag = chip.getAttribute('data-tag');
+    moodTiles.forEach(function (t) { t.style.display = (tag === 'all' || t.getAttribute('data-tag') === tag) ? '' : 'none'; });
+  });
+
+  /* ================= colour utilities ================= */
+  function currentVar(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
+  function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
+    var n = parseInt(hex, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(function (v) {
+      return Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0');
+    }).join('').toUpperCase();
+  }
+  function mix(a, b, t) {
+    var x = hexToRgb(a), y = hexToRgb(b);
+    return rgbToHex(x[0] + (y[0] - x[0]) * t, x[1] + (y[1] - x[1]) * t, x[2] + (y[2] - x[2]) * t);
+  }
+  function hexToCmyk(hex) {
+    var rgb = hexToRgb(hex).map(function (v) { return v / 255; });
+    var k = 1 - Math.max(rgb[0], rgb[1], rgb[2]);
+    if (k >= 1) return [0, 0, 0, 100];
+    var c = (1 - rgb[0] - k) / (1 - k), m = (1 - rgb[1] - k) / (1 - k), y = (1 - rgb[2] - k) / (1 - k);
+    return [c, m, y, k].map(function (v) { return Math.round(v * 100); });
+  }
+  function luminance(rgb) {
+    var a = rgb.map(function (v) {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+  }
+  function contrastRatio(a, b) {
+    var l1 = luminance(hexToRgb(a)) + 0.05, l2 = luminance(hexToRgb(b)) + 0.05;
+    return l1 > l2 ? l1 / l2 : l2 / l1;
+  }
+  function readableTextOn(hex) {
+    return contrastRatio(hex, '#FFFFFF') > contrastRatio(hex, '#000000') ? '#FFFFFF' : '#111111';
+  }
+
+  /* nearest-PMS approximation: curated reference table + CIE Lab distance. */
+  var PMS = [
+    { c: 'Black C', h: '#2D2926' }, { c: 'Black 6 C', h: '#2E2C2F' },
+    { c: 'Cool Gray 1 C', h: '#D9D9D6' }, { c: 'Cool Gray 3 C', h: '#C8C9C7' },
+    { c: 'Cool Gray 5 C', h: '#B1B3B3' }, { c: 'Cool Gray 7 C', h: '#97999B' },
+    { c: 'Cool Gray 9 C', h: '#75787B' }, { c: 'Cool Gray 11 C', h: '#53565A' },
+    { c: 'Warm Gray 1 C', h: '#D7D2CB' }, { c: 'Warm Gray 4 C', h: '#BFB8AD' },
+    { c: 'Warm Gray 7 C', h: '#A39987' }, { c: 'Warm Gray 10 C', h: '#8A8177' },
+    { c: 'White', h: '#FFFFFF' },
+    { c: 'Red 032 C', h: '#EF3340' }, { c: '186 C', h: '#C8102E' }, { c: '1795 C', h: '#D22630' },
+    { c: '199 C', h: '#E40046' }, { c: '213 C', h: '#E0175D' }, { c: '219 C', h: '#D6006D' },
+    { c: '200 C', h: '#BA0C2F' }, { c: '7427 C', h: '#8C1D40' },
+    { c: '021 C', h: '#FE5000' }, { c: '1585 C', h: '#FF8200' }, { c: '172 C', h: '#FA4616' },
+    { c: 'Yellow C', h: '#FEDD00' }, { c: '116 C', h: '#FFCD00' }, { c: '7406 C', h: '#FFC72C' },
+    { c: '1235 C', h: '#FFB81C' }, { c: '809 C', h: '#FFE900' },
+    { c: '355 C', h: '#00B140' }, { c: '348 C', h: '#00843D' }, { c: '3425 C', h: '#00693C' },
+    { c: '376 C', h: '#84BD00' }, { c: '802 C', h: '#67D400' }, { c: '3405 C', h: '#00A651' },
+    { c: '3115 C', h: '#7FDBDA' }, { c: '3145 C', h: '#007A87' }, { c: '320 C', h: '#0093B2' },
+    { c: '3255 C', h: '#00A99D' }, { c: '306 C', h: '#00B4E3' }, { c: '2995 C', h: '#00A3E0' },
+    { c: '286 C', h: '#0018A8' }, { c: '300 C', h: '#0072CE' }, { c: '2925 C', h: '#009CDE' },
+    { c: '072 C', h: '#00369C' }, { c: '2935 C', h: '#003DA5' }, { c: '279 C', h: '#4E9BD9' },
+    { c: '2685 C', h: '#330072' }, { c: '2607 C', h: '#652D86' }, { c: '2593 C', h: '#8031A7' },
+    { c: '2665 C', h: '#5F259F' },
+    { c: '462 C', h: '#6C4A3B' }, { c: '4625 C', h: '#4C2C1F' }, { c: '469 C', h: '#754C29' },
+    { c: '2385 C', h: '#A6093D' }, { c: '241 C', h: '#CB2D8A' }, { c: '2035 C', h: '#EB3F94' }
+  ];
+  function rgbToLab(rgb) {
+    var r = rgb[0] / 255, g = rgb[1] / 255, b = rgb[2] / 255;
+    function lin(v) { return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
+    r = lin(r); g = lin(g); b = lin(b);
+    var X = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
+    var Y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1;
+    var Z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
+    function f(t) { return t > 0.008856 ? Math.pow(t, 1 / 3) : (7.787 * t + 16 / 116); }
+    var fx = f(X), fy = f(Y), fz = f(Z);
+    return [116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz)];
+  }
+  var pmsLabCache = null;
+  function nearestPMS(hex) {
+    if (!pmsLabCache) pmsLabCache = PMS.map(function (p) { return { c: p.c, lab: rgbToLab(hexToRgb(p.h)) }; });
+    var lab = rgbToLab(hexToRgb(hex));
+    var best = null, bestD = Infinity;
+    pmsLabCache.forEach(function (p) {
+      var d = Math.sqrt(Math.pow(lab[0] - p.lab[0], 2) + Math.pow(lab[1] - p.lab[1], 2) + Math.pow(lab[2] - p.lab[2], 2));
+      if (d < bestD) { bestD = d; best = p.c; }
+    });
+    return best;
+  }
+
+  var TOKENS = [
+    { key: '--brand-primary', name: 'Primary', role: 'Dominant brand colour — structure and key actions' },
+    { key: '--brand-secondary', name: 'Secondary', role: 'Deliberate accent — used sparingly' },
+    { key: '--brand-neutral-dark', name: 'Neutral Dark', role: 'Ink, dark surfaces, high-contrast text' },
+    { key: '--brand-neutral-light', name: 'Neutral Light', role: 'Paper, light surfaces, backgrounds' }
+  ];
+  var copyIc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11" style="opacity:.7;flex:none;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+
+  function renderColourSection() {
+    var wrap = document.getElementById('colourSwatches');
+    wrap.innerHTML = TOKENS.map(function (tok) {
+      var hex = currentVar(tok.key).toUpperCase();
+      var rgb = hexToRgb(hex);
+      var cmyk = hexToCmyk(hex);
+      var pms = nearestPMS(hex);
+      var textOn = readableTextOn(hex);
+      var tints = [0.75, 0.55, 0.35, 0.15, 0].map(function (t) { return mix(hex, '#FFFFFF', t); })
+        .concat([0.2, 0.4, 0.6].map(function (t) { return mix(hex, '#000000', t); }));
+      return '' +
+        '<div class="swatch">' +
+          '<div class="swatch-face" style="background:' + hex + '; color:' + textOn + ';">' +
+            '<div><h4>' + tok.name + '</h4><p class="swatch-role">' + tok.role + '</p></div>' +
+            '<div class="swatch-values">' +
+              '<button class="value-row" type="button" data-copy="' + hex + '"><span class="vl">Hex</span><span class="vv" style="display:flex;align-items:center;gap:.4rem;">' + hex + copyIc + '</span></button>' +
+              '<button class="value-row" type="button" data-copy="rgb(' + rgb.join(', ') + ')"><span class="vl">RGB</span><span class="vv" style="display:flex;align-items:center;gap:.4rem;">' + rgb.join(' · ') + copyIc + '</span></button>' +
+              '<button class="value-row" type="button" data-copy="cmyk(' + cmyk[0] + '%, ' + cmyk[1] + '%, ' + cmyk[2] + '%, ' + cmyk[3] + '%)"><span class="vl">CMYK</span><span class="vv" style="display:flex;align-items:center;gap:.4rem;">' + cmyk.join(' · ') + copyIc + '</span></button>' +
+              '<button class="value-row" type="button" data-copy="PMS ' + pms + '"><span class="vl">PMS ≈</span><span class="vv" style="display:flex;align-items:center;gap:.4rem;">' + pms + copyIc + '</span></button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="tint-strip">' + tints.map(function (t) {
+            return '<button class="tint-swatch" type="button" style="background:' + t + ';" data-copy="' + t + '" title="' + t + '" aria-label="Copy ' + t + '"></button>';
+          }).join('') + '</div>' +
+        '</div>';
+    }).join('');
+
+    var pairs = [
+      { a: '--brand-neutral-dark', b: '--brand-neutral-light', label: 'Neutral dark on neutral light' },
+      { a: '--brand-neutral-light', b: '--brand-neutral-dark', label: 'Neutral light on neutral dark' },
+      { a: '--brand-primary', b: '--brand-neutral-light', label: 'Primary on neutral light' },
+      { a: '--brand-neutral-light', b: '--brand-primary', label: 'Neutral light on primary' },
+      { a: '--brand-secondary', b: '--brand-neutral-light', label: 'Secondary on neutral light' },
+      { a: '--brand-neutral-light', b: '--brand-secondary', label: 'Neutral light on secondary' }
+    ];
+    document.getElementById('contrastTable').innerHTML = pairs.map(function (p) {
+      var A = currentVar(p.a), B = currentVar(p.b);
+      var ratio = contrastRatio(A, B);
+      var pass = ratio >= 4.5;
+      return '<tr>' +
+        '<td>' + p.label + '</td>' +
+        '<td><span class="contrast-pair"><span style="background:' + B + '; color:' + A + ';">Ab</span></span></td>' +
+        '<td class="mono">' + ratio.toFixed(2) + ':1</td>' +
+        '<td><span class="badge ' + (pass ? 'pass' : 'fail') + '">' + (pass ? 'PASS' : 'FAIL') + '</span></td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  /* ================= icon library ================= */
+  var ICONS = [
+    { name: 'home', d: '<path d="M3 11l9-8 9 8M5 10v10h14V10"/>' },
+    { name: 'search', d: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>' },
+    { name: 'check', d: '<path d="M20 6 9 17l-5-5"/>' },
+    { name: 'plus', d: '<path d="M12 5v14M5 12h14"/>' },
+    { name: 'minus', d: '<path d="M5 12h14"/>' },
+    { name: 'close', d: '<path d="M18 6 6 18M6 6l12 12"/>' },
+    { name: 'arrow-right', d: '<path d="M5 12h14M13 5l7 7-7 7"/>' },
+    { name: 'arrow-left', d: '<path d="M19 12H5M11 5l-7 7 7 7"/>' },
+    { name: 'arrow-up', d: '<path d="M12 19V5M5 11l7-7 7 7"/>' },
+    { name: 'arrow-down', d: '<path d="M12 5v14M19 13l-7 7-7-7"/>' },
+    { name: 'chevron-down', d: '<path d="m6 9 6 6 6-6"/>' },
+    { name: 'chevron-right', d: '<path d="m9 6 6 6-6 6"/>' },
+    { name: 'user', d: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/>' },
+    { name: 'settings', d: '<circle cx="12" cy="12" r="3"/><path d="M4 12h2M18 12h2M12 4v2M12 18v2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4"/>' },
+    { name: 'bell', d: '<path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 21a2 2 0 0 0 4 0"/>' },
+    { name: 'mail', d: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>' },
+    { name: 'calendar', d: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>' },
+    { name: 'clock', d: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>' },
+    { name: 'download', d: '<path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>' },
+    { name: 'upload', d: '<path d="M12 21V9m0 0-4 4m4-4 4 4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>' },
+    { name: 'trash', d: '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/>' },
+    { name: 'edit', d: '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>' },
+    { name: 'heart', d: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/>' },
+    { name: 'star', d: '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8l-6.2 3.2L7 14.2 2 9.3l6.9-1Z"/>' },
+    { name: 'filter', d: '<path d="M4 5h16M7 12h10M10 19h4"/>' },
+    { name: 'lock', d: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>' },
+    { name: 'eye', d: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>' },
+    { name: 'share', d: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-3.9M8.6 13.5l6.8 3.9"/>' },
+    { name: 'link', d: '<path d="M9 15 15 9M10.5 6.5 13 4a4 4 0 1 1 5.7 5.7L16 12M13.5 17.5 11 20a4 4 0 1 1-5.7-5.7L8 12"/>' },
+    { name: 'copy', d: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>' },
+    { name: 'info', d: '<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/>' },
+    { name: 'grid', d: '<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/>' }
+  ];
+  document.getElementById('iconGrid').innerHTML = ICONS.map(function (ic) {
+    return '<div class="card" style="display:flex; flex-direction:column; align-items:center; gap:.55rem; padding:1rem;">' +
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ic.d + '</svg>' +
+      '<span class="mono" style="font-size:.6563rem; color:var(--t3);">' + ic.name + '</span>' +
+    '</div>';
+  }).join('');
+
+  /* ================= type scale (px / rem toggle, 6-col grid rows) ================= */
+  var SCALE = [
+    { label: 'Eyebrow', px: 11, lh: 16, weight: 700, tracking: '.1em', sampleStyle: 'text-transform:uppercase; letter-spacing:.1em; color:var(--t2);', sample: 'Section label overline' },
+    { label: 'Display', px: 56, lh: 58, weight: 800, tracking: '-.03em', sampleStyle: '', sample: 'Money moves' },
+    { label: 'H1', px: 36, lh: 42, weight: 800, tracking: '-.02em', sampleStyle: '', sample: 'Section headline' },
+    { label: 'H2', px: 26, lh: 32, weight: 700, tracking: '-.01em', sampleStyle: '', sample: 'A clear subsection title' },
+    { label: 'H3', px: 19, lh: 26, weight: 700, tracking: null, sampleStyle: '', sample: 'Card and component titles' },
+    { label: 'H4', px: 17, lh: 24, weight: 700, tracking: null, sampleStyle: '', sample: 'A smaller in-card heading' },
+    { label: 'H5', px: 15, lh: 22, weight: 600, tracking: null, sampleStyle: '', sample: 'List and table group titles' },
+    { label: 'H6', px: 13, lh: 20, weight: 600, tracking: null, sampleStyle: 'color:var(--t2);', sample: 'The smallest labelled heading' },
+    { label: 'Body 1', px: 18, lh: 28, weight: 400, tracking: null, sampleStyle: '', sample: 'Lead paragraphs — the first thing under a headline.' },
+    { label: 'Body 2', px: 16, lh: 26, weight: 400, tracking: null, sampleStyle: '', sample: 'Running text reads comfortably at this size and line height.' },
+    { label: 'Body 3', px: 14, lh: 22, weight: 400, tracking: null, sampleStyle: 'color:var(--t2);', sample: 'Secondary or dense body copy — dense tables, fine print blocks.' },
+    { label: 'Caption', px: 13, lh: 18, weight: 500, tracking: null, sampleStyle: 'color:var(--t2);', sample: 'Metadata, labels, and fine print.' }
+  ];
+  var scaleUnit = 'px';
+  function fmtRem(px) {
+    var v = px / 16;
+    return (Math.round(v * 10000) / 10000) + 'rem';
+  }
+  function renderScaleTable() {
+    var body = document.getElementById('scaleGridBody');
+    if (!body) return;
+    body.innerHTML = SCALE.map(function (s) {
+      var fsCss = scaleUnit === 'px' ? s.px + 'px' : fmtRem(s.px);
+      var lhCss = scaleUnit === 'px' ? s.lh + 'px' : fmtRem(s.lh);
+      var metaFs = scaleUnit === 'px' ? s.px + ' / ' + s.lh : fmtRem(s.px) + ' / ' + fmtRem(s.lh);
+      var decl = 'font-size: ' + fsCss + '; line-height: ' + lhCss + '; font-weight: ' + s.weight + (s.tracking ? '; letter-spacing: ' + s.tracking : '') + (s.label === 'Eyebrow' ? '; text-transform: uppercase' : '') + ';';
+      return '' +
+        '<div class="scale-cell gcol-1"><span class="scale-code">' + s.label + '</span></div>' +
+        '<div class="scale-cell gcol-2-4" style="font-size:' + fsCss + '; line-height:' + lhCss + '; font-weight:' + s.weight + (s.tracking ? '; letter-spacing:' + s.tracking : '') + ';' + s.sampleStyle + '">' + s.sample + '</div>' +
+        '<div class="scale-cell gcol-5"><span class="scale-meta">' + metaFs + ' · ' + s.weight + (s.tracking ? ' · ' + s.tracking : '') + '</span></div>' +
+        '<div class="scale-cell scale-btn-cell gcol-6"><button class="copy-btn" data-copy="' + decl.replace(/"/g, '&quot;') + '">CSS</button></div>';
+    }).join('');
+  }
+  var unitToggle = document.getElementById('unitToggle');
+  if (unitToggle) {
+    unitToggle.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-unit]');
+      if (!btn) return;
+      scaleUnit = btn.getAttribute('data-unit');
+      Array.prototype.slice.call(unitToggle.querySelectorAll('button')).forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+      renderScaleTable();
+    });
+  }
+  renderScaleTable();
+
+  /* ================= motion tokens (bars + easing graphs) ================= */
+  var DURATIONS = [
+    { name: 'Micro', ms: 120 },
+    { name: 'Default', ms: 220 },
+    { name: 'Emphasis', ms: 400 }
+  ];
+  var EASINGS = [
+    { name: 'Standard', x1: .4, y1: 0, x2: .2, y2: 1 },
+    { name: 'Decelerate', x1: 0, y1: 0, x2: .2, y2: 1 },
+    { name: 'Accelerate', x1: .4, y1: 0, x2: 1, y2: 1 }
+  ];
+  function easingCurveSvg(x1, y1, x2, y2) {
+    var W = 200, H = 84, pad = 8, iw = W - 2 * pad, ih = H - 2 * pad;
+    function px(t) { return pad + t * iw; }
+    function py(p) { return pad + ih - p * ih; }
+    var p0x = px(0), p0y = py(0), p3x = px(1), p3y = py(1);
+    var c1x = px(x1), c1y = py(y1), c2x = px(x2), c2y = py(y2);
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" height="' + H + '">' +
+      '<line x1="' + p0x + '" y1="' + p0y + '" x2="' + p3x + '" y2="' + p3y + '" stroke="currentColor" stroke-opacity=".18" stroke-dasharray="3 3"/>' +
+      '<path d="M' + p0x + ' ' + p0y + ' C ' + c1x + ' ' + c1y + ', ' + c2x + ' ' + c2y + ', ' + p3x + ' ' + p3y + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+      '<circle cx="' + c1x + '" cy="' + c1y + '" r="2.5" fill="currentColor" opacity=".5"/>' +
+      '<circle cx="' + c2x + '" cy="' + c2y + '" r="2.5" fill="currentColor" opacity=".5"/>' +
+    '</svg>';
+  }
+  var durationWrap = document.getElementById('durationTokens');
+  if (durationWrap) {
+    var maxMs = 450;
+    durationWrap.innerHTML = DURATIONS.map(function (d) {
+      var pct = Math.round((d.ms / maxMs) * 100);
+      return '<div class="token-row">' +
+        '<span class="motion-name">' + d.name + '</span>' +
+        '<div class="duration-bar-track"><div class="duration-bar-fill" style="width:' + pct + '%;"></div></div>' +
+        '<span class="motion-val">' + d.ms + 'ms</span>' +
+        '<button class="copy-btn" data-copy="transition-duration: ' + d.ms + 'ms;">CSS</button>' +
+      '</div>';
+    }).join('');
+  }
+  var easingWrap = document.getElementById('easingTokens');
+  if (easingWrap) {
+    easingWrap.innerHTML = EASINGS.map(function (e) {
+      var bez = 'cubic-bezier(' + e.x1 + ', ' + e.y1 + ', ' + e.x2 + ', ' + e.y2 + ')';
+      return '<div class="token-row" style="grid-template-columns:5.5rem 1fr auto;">' +
+        '<span class="motion-name">' + e.name + '</span>' +
+        '<div class="ease-graph">' + easingCurveSvg(e.x1, e.y1, e.x2, e.y2) + '</div>' +
+        '<button class="copy-btn" data-copy="transition-timing-function: ' + bez + ';">CSS</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* ================= motion demos ================= */
+  document.querySelectorAll('.motion-track').forEach(function (track) {
+    var dot = track.querySelector('.motion-dot');
+    var duration = track.getAttribute('data-duration') || '250';
+    var easing = track.getAttribute('data-easing') || 'ease';
+    dot.style.transition = 'left ' + duration + 'ms ' + easing;
+    var atEnd = false;
+    function play() {
+      atEnd = !atEnd;
+      dot.style.left = atEnd ? 'calc(100% - 28px)' : '4px';
+    }
+    track.addEventListener('mouseenter', play);
+    track.addEventListener('click', play);
+  });
+
+  /* ================= customize drawer ================= */
+  var drawer = document.getElementById('drawer');
+  var drawerOverlay = document.getElementById('drawerOverlay');
+  function setDrawerOpen(open) {
+    drawer.classList.toggle('is-open', open);
+    drawerOverlay.classList.toggle('is-open', open);
+  }
+  document.getElementById('customizeToggle').addEventListener('click', function () { setDrawerOpen(true); });
+  document.getElementById('openCustomizeInline').addEventListener('click', function () { setDrawerOpen(true); });
+  document.getElementById('drawerClose').addEventListener('click', function () { setDrawerOpen(false); });
+  drawerOverlay.addEventListener('click', function () { setDrawerOpen(false); });
+
+  var DEFAULTS = { name: 'Brand Name', primary: '#E32636', secondary: '#14383E', dark: '#111111', light: '#F4F4F2' };
+  var TOKEN_FIELDS = [
+    { css: '--brand-primary', color: 'inputPrimary', text: 'inputPrimaryHex', key: 'primary' },
+    { css: '--brand-secondary', color: 'inputSecondary', text: 'inputSecondaryHex', key: 'secondary' },
+    { css: '--brand-neutral-dark', color: 'inputNeutralDark', text: 'inputNeutralDarkHex', key: 'dark' },
+    { css: '--brand-neutral-light', color: 'inputNeutralLight', text: 'inputNeutralLightHex', key: 'light' }
+  ];
+  function loadTokens() {
+    try { return JSON.parse(storage.get('bg-tokens')) || {}; } catch (e) { return {}; }
+  }
+  function saveTokens(tokens) { storage.set('bg-tokens', JSON.stringify(tokens)); }
+  var tokenState = loadTokens();
+
+  function applyBrandName(name) {
+    document.getElementById('brandNameDisplay').textContent = name;
+    document.getElementById('coverTitle').textContent = name;
+  }
+  function applyTokenField(f, hex, skipRender) {
+    root.style.setProperty(f.css, hex);
+    document.getElementById(f.color).value = hex;
+    document.getElementById(f.text).value = hex.toUpperCase();
+    if (!skipRender) renderColourSection();
+  }
+  TOKEN_FIELDS.forEach(function (f) {
+    var saved = tokenState[f.key];
+    if (saved && /^#[0-9a-fA-F]{6}$/.test(saved)) applyTokenField(f, saved, true);
+    function update(hex) {
+      if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
+      applyTokenField(f, hex);
+      tokenState[f.key] = hex.toUpperCase();
+      saveTokens(tokenState);
+    }
+    document.getElementById(f.color).addEventListener('input', function (e) { update(e.target.value); });
+    document.getElementById(f.text).addEventListener('change', function (e) { update(e.target.value); });
+  });
+  var nameInput = document.getElementById('inputBrandName');
+  if (tokenState.name) { nameInput.value = tokenState.name; applyBrandName(tokenState.name); }
+  nameInput.addEventListener('input', function (e) {
+    var v = e.target.value.trim() || DEFAULTS.name;
+    applyBrandName(v);
+    tokenState.name = v;
+    saveTokens(tokenState);
+  });
+  document.getElementById('resetTokens').addEventListener('click', function () {
+    TOKEN_FIELDS.forEach(function (f) {
+      root.style.removeProperty(f.css);
+      applyTokenField(f, DEFAULTS[f.key], true);
+    });
+    nameInput.value = DEFAULTS.name;
+    applyBrandName(DEFAULTS.name);
+    tokenState = {};
+    storage.del('bg-tokens');
+    renderColourSection();
+    showToast('Name & colours reset');
+  });
+
+  /* ================= text editing ================= */
+  var EDIT_SEL = 'h1,h2,h3,h4,p,li,dt,dd,figcaption,th,td';
+  var textEdits = {};
+  try { textEdits = JSON.parse(storage.get('bg-texts')) || {}; } catch (e) { textEdits = {}; }
+  var saveTimer = null;
+  function scheduleTextSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { storage.set('bg-texts', JSON.stringify(textEdits)); }, 400);
+  }
+  function buildEditables() {
+    var candidates = Array.prototype.slice.call(content.querySelectorAll(EDIT_SEL)).filter(function (el) {
+      if (el.closest('[data-nonedit]')) return false;
+      if (el.querySelector('button, svg, input, select, textarea, img')) return false;
+      if (!el.textContent.trim()) return false;
+      return true;
+    });
+    candidates.forEach(function (el) { el.setAttribute('data-ekc', '1'); });
+    var keepers = candidates.filter(function (el) {
+      var p = el.parentElement;
+      while (p && p !== content) {
+        if (p.hasAttribute('data-ekc')) return false;
+        p = p.parentElement;
+      }
+      return true;
+    });
+    candidates.forEach(function (el) { el.removeAttribute('data-ekc'); });
+    keepers.forEach(function (el, i) {
+      el.setAttribute('data-ek', String(i));
+      if (typeof textEdits[i] === 'string') el.textContent = textEdits[i];
+    });
+    return keepers;
+  }
+  var editables = buildEditables();
+  var editHint = document.getElementById('editHint');
+  var editToggleBtn = document.getElementById('editToggle');
+  function setEditing(on) {
+    document.body.classList.toggle('is-editing', on);
+    editHint.hidden = !on;
+    editToggleBtn.setAttribute('aria-pressed', on);
+    editToggleBtn.textContent = on ? 'Turn off text editing' : 'Turn on text editing';
+    editables.forEach(function (el) {
+      if (on) {
+        el.contentEditable = 'plaintext-only';
+        if (el.contentEditable !== 'plaintext-only') el.contentEditable = 'true';
+      } else {
+        el.contentEditable = 'false';
+        el.removeAttribute('contenteditable');
+      }
+    });
+  }
+  editToggleBtn.addEventListener('click', function () {
+    var on = !document.body.classList.contains('is-editing');
+    setEditing(on);
+    if (on) setDrawerOpen(false);
+  });
+  document.getElementById('editDone').addEventListener('click', function () { setEditing(false); });
+  content.addEventListener('input', function (e) {
+    var el = e.target.closest && e.target.closest('[data-ek]');
+    if (!el) return;
+    textEdits[el.getAttribute('data-ek')] = el.textContent;
+    scheduleTextSave();
+  });
+  document.getElementById('resetTexts').addEventListener('click', function () {
+    storage.del('bg-texts');
+    location.reload();
+  });
+
+  /* ================= init ================= */
+  renderColourSection();
+  if (location.hash) {
+    var id = location.hash.slice(1);
+    if (document.getElementById(id)) {
+      openGroup(parentOf[id] || id);
+      setActive(id);
+    }
+  }
+})();
+</script>
